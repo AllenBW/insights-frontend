@@ -1,33 +1,26 @@
+/*global require*/
 'use strict';
 
 var componentsModule = require('../');
-const includes = require('lodash/includes');
 
 /**
 * @ngInject
 */
 
-// function primaryNavCtrl($scope, Utils, $state, InsightsConfig, $timeout, $mdSidenav) {
 function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
-    // $scope.toggleLeft = buildToggler('left');
 
-    // $scope.toggleLeft = buildToggler('left');
-    // $scope.toggleRight = buildToggler('right');
-
-    // function buildToggler(componentId) {
-    //   return function() {
-    //     $mdSidenav(componentId).toggle();
-    //   };
-    // }
-
-    const policyAccounts = {540155: true};
+  const policyAccounts = {
+        540155: true,
+        540694: true
+    };
 
     $scope.canSeePolicies = false;
     $scope.isHidden = false;
     $scope.utils = Utils;
     $scope.state = $state;
-    $scope.includes = includes;
     $scope.config = InsightsConfig;
+    $scope.doLogout = InsightsJwt.standardLogout;
+    $scope.isPortal = InsightsConfig.isPortal;
 
     $scope.toggleNav = function () {
         $scope.isHidden = !$scope.isHidden;
@@ -36,11 +29,8 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
     $scope.states = {
         rules: [
             'app.rules',
-            'app.admin-rules',
-            'app.admin-rule-tags',
-            'app.create-rule',
-            'app.show-rule',
-            'app.edit-rule'
+            'app.admin-topic',
+            'app.edit-topic'
         ],
         actions: [
             'app.actions',
@@ -55,6 +45,12 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
             'app.view-policy',
             'app.list-policies'
         ]
+    };
+
+    $scope.isActive = function (states) {
+        return {
+            current: states.some(state => $state.is(state))
+        };
     };
 
     function checkPolicies () {
