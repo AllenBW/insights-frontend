@@ -101,6 +101,28 @@ md-menu-content {
   }
 }
 
+.ui-select-bootstrap .ui-select-match-text span {
+  display: inline;
+}
+
+
+// Plugin overrides
+body {
+.ui-select-bootstrap.dropdown .ui-select-toggle, 
+.ui-select-bootstrap.dropdown input[type="search"], 
+.ui-select-bootstrap.dropdown .error-info textarea[type="search"].changed.ng-dirty, 
+.error-info .ui-select-bootstrap.dropdown textarea[type="search"].changed.ng-dirty, 
+.ui-select-bootstrap.dropdown .error-info select[type="search"].changed.ng-dirty, 
+.error-info .ui-select-bootstrap.dropdown select[type="search"].changed.ng-dirty {
+  @include rem('padding', 6px 12px);
+}
+}
+
+// .ui-select-bootstrap.dropdown .form-control .ui-select-toggle {
+//   @include rem('padding', 6px 12px);
+// }
+
+
 .dropdown.dropdown-blue,
 .ui-select-bootstrap.dropdown.dropdown-blue {
   $dropdown-blue-line-height: 1;
