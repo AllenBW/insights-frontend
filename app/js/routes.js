@@ -152,6 +152,14 @@ function Routes($stateProvider) {
             templateUrl: 'js/states/vulnerabilities/vulnerabilities.html',
             controller: 'VulnerabilitiesCtrl',
             title: 'Vulnerabilities'
+        })
+
+        .state('app.vulnerabilities-rhsas', {
+            url: '/vulnerabilities/:package_id/rhsas',
+            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsas' +
+            '/vulnerabilitiesRhsas.html',
+            controller: 'VulnerabilitiesRhsasCtrl',
+            title: 'Vulnerabilities'
         });
 
     // Common announcements routes

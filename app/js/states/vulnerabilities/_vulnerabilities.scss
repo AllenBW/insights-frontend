@@ -23,7 +23,7 @@ $card-footer: "md-card-footer";
   }
 }
 
-.vul-state { 
+.vul-state {
   > * {
     &:first-child { margin-left: 0px; }
     @include rem('margin-left', 5px);
@@ -31,8 +31,9 @@ $card-footer: "md-card-footer";
   }
 }
 
-.page-vulnerabilities, 
-.vulnerabilities-modal {
+.page-vulnerabilities,
+.vulnerabilities-modal,
+.page-vulnerabilities-rhsa {
 
   .critical { color: $vul-critical; }
   .important { color: $vul-important; }
