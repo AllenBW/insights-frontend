@@ -13,9 +13,11 @@ function VulnerabilitiesCtrl($filter,
                              $scope,
                              InventoryService,
                              Utils,
+                             Events,
                              Vulnerability,
                              SystemModalTabs) {
 
+    let _allVulnerabilities;
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
     $scope.vulnerabilities = [];
@@ -36,7 +38,7 @@ function VulnerabilitiesCtrl($filter,
         params.search_term = $scope.searchText;
 
         Vulnerability.getAll(params).then((vulnerabilities) => {
-            $scope.allVulnerabilities = vulnerabilities;
+            $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
             order();
             $scope.loading = false;
         });
@@ -71,6 +73,21 @@ function VulnerabilitiesCtrl($filter,
         reloadTable();
     }
 
+    $scope.search = function (model) {
+        if (!model || model === '') {
+            $scope.allVulnerabilities = _allVulnerabilities;
+        } else {
+            $scope.allVulnerabilities = [];
+            _allVulnerabilities.forEach((vulnerability) => {
+                if (vulnerability.name.indexOf(model) !== -1) {
+                    $scope.allVulnerabilities.push(vulnerability);
+                }
+            });
+        }
+
+        reloadTable();
+    };
+
     $scope.showSystem = function (system_id) {
         InventoryService.showSystemModal({system_id: system_id}, true,
                                          SystemModalTabs.vulnerabilities);
@@ -78,7 +95,12 @@ function VulnerabilitiesCtrl($filter,
 
     getData();
 
-    $scope.$on('reload:data', getData);
+    const reloadDataListener = $scope.$on('reload:data', getData);
+    const filterResetListener = $scope.$on(Events.filters.reset, getData);
+    $scope.$on('$destroy', function () {
+        reloadDataListener();
+        filterResetListener();
+    });
 }
 
 statesModule.controller('VulnerabilitiesCtrl', VulnerabilitiesCtrl);

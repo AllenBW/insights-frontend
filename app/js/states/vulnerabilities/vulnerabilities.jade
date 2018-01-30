@@ -3,52 +3,25 @@
     page-header(title="Vulnerabilities", icon="fa-stethoscope")
 
   table-filters
-    search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
-    check-in-select
-    rhsa-severity-select
-    days-known-select
+    search-box(placeholder="{{'Search Packages' | translate}}", on-search='search(model)')
 
   // TODO make embedded card a component
   .content-wrap
-    expand-all-button.toggle-expand-right
-    card.outer-card(expandable='true', ng-repeat='vulnerability in vulnerabilities')
-      card-header-expandable
-        .card-header-title
-          .title.package-info
-            .name {{vulnerability.name}}
-            .date Release Date: {{vulnerability.release_date}}
-          .vul-state 
-            .critical.icon-inline
-              i.fa.fa-shield
-              span(translate) {{vulnerability.critical_count}} Critical
-            .important.icon-inline
-              i.fa.fa-shield
-              span(translate) {{vulnerability.important_count}} Important
-            .moderate.icon-inline
-              i.fa.fa-shield
-              span(translate) {{vulnerability.moderate_count}} Moderate 
-            .low.icon-inline
-              i.fa.fa-shield
-              span(translate) {{vulnerability.low_count}} Low
-              
-      card-content.card-content.embedded-card(collapse="card.collapsed")
         table
           thead
             tr
-              th.min.fit-content.nowrap.sortable(translate) System Type
-              th.nowrap.sortable(translate) System Name
-              th.min.fit-content.nowrap.sortable(translate) Last Check In
-              th.min.fit-content.nowrap.sortable(translate) Status
+              th.min.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
+                ng-click="sort('toString')", translate) Package Name
+              th.text-center.min.fit-content.nowrap.sortable(translate) RHSAs
+              th.text-center.min.fit-content.nowrap.sortable(translate) System Affected
+              th.text-center.min.fit-content.nowrap.sortable(translate) Release Date
           tbody
-            tr(ng-repeat='system in vulnerability.systems')
+            tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                type-icon(type-id='system.system_type_id', include-text='true')
-              td.fit-content.nowrap
-                a(ng-click='showSystem(system.system_id)') {{system.toString}}
-              td.fit-content.nowrap
-                span {{system.last_check_in | timeAgo}}
-              td.fit-content.nowrap
-                span {{system.report_count}}
-
-              
-
+                a(ui-sref='app.vulnerabilities-rhsas({package_id: vulnerability.id, package: vulnerability})') {{:: vulnerability.name}}
+              td.text-center.fit-content.nowrap
+                span {{vulnerability.rhsas.length}}
+              td.text-center.fit-content.nowrap
+                span {{vulnerability.systems.length}}
+              td.text-center.fit-content.nowrap
+                span {{:: vulnerability.release_date}}

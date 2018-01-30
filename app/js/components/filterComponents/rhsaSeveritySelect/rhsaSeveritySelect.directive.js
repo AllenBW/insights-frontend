@@ -34,28 +34,6 @@ function rhsaSeveritySelectCtrl($rootScope,
     // index for $scope.options
     const DEFAULT_OPTION = 0;
 
-    /**
-     * Initializes rhsa filter by checking for the url for
-     * the previous filter or defaults to showing all rhsas/pacakges/cves.
-     */
-    (function init() {
-        Object.freeze(optionsMap);
-        let option = $location.search()[Events.filters.rhsaSeverity] ?
-                     $location.search()[Events.filters.rhsaSeverity] :
-                     FilterService.getRhsaSeverity();
-
-        if (option) {
-            option = option.split(',');
-            option.forEach(function (option) {
-                $scope.options[optionsMap[option]].selected = true;
-            });
-
-            broadcastTabs();
-        } else {
-            setDefaultOption();
-        }
-    })();
-
     $scope.openMenu = function ($mdMenu, event) {
         if (!menu) {
             menu = $mdMenu;
@@ -79,25 +57,9 @@ function rhsaSeveritySelectCtrl($rootScope,
     };
 
     /**
-     * Concatenates the tabs if multiple severities are chosen.
-     *
-     * @return {String} tag for filters
-     */
-    function broadcastTabs() {
-        filter($scope.options, {selected: true}).forEach((option) => {
-            $rootScope.$broadcast(Events.filters.tag,
-                              option.tag,
-                              Events.filters.rhsaSeverity);
-        });
-    }
-
-    /**
      * Sets url query and broadcasts events to execute the query.
      */
-    $scope.doFilter = function () {
-        setURL();
-        broadcastTabs();
-    };
+    $scope.doFilter = setURL;
 
     function setURL() {
         let str = '';
@@ -119,6 +81,11 @@ function rhsaSeveritySelectCtrl($rootScope,
 
         FilterService.doFilter();
         $rootScope.$broadcast(Events.filters.rhsaSeverity, str);
+        filter($scope.options, {selected: true}).forEach((option) => {
+            $rootScope.$broadcast(Events.filters.tag,
+                              option.tag,
+                              Events.filters.rhsaSeverity);
+        });
 
         return str;
     }
@@ -151,6 +118,8 @@ function rhsaSeveritySelectCtrl($rootScope,
         if (!isOptionSelected) {
             $scope.options[DEFAULT_OPTION].selected = true;
         }
+
+        $scope.doFilter();
     }
 
     /**
@@ -162,12 +131,32 @@ function rhsaSeveritySelectCtrl($rootScope,
         });
 
         $scope.options[DEFAULT_OPTION].selected = true;
+        $scope.doFilter();
     }
 
-    const resetFilterListener = $scope.$on(Events.filters.reset, function () {
-        setDefaultOption();
-        $scope.doFilter();
-    });
+    /**
+     * Initializes rhsa filter by checking for the url for
+     * the previous filter or defaults to showing all rhsas/pacakges/cves.
+     */
+    (function init() {
+        Object.freeze(optionsMap);
+        let option = $location.search()[Events.filters.rhsaSeverity] ?
+                     $location.search()[Events.filters.rhsaSeverity] :
+                     FilterService.getRhsaSeverity();
+
+        if (option) {
+            option = option.split(',');
+            option.forEach(function (option) {
+                $scope.options[optionsMap[option]].selected = true;
+            });
+
+            $scope.doFilter();
+        } else {
+            setDefaultOption();
+        }
+    })();
+
+    const resetFilterListener = $scope.$on(Events.filters.reset, setDefaultOption);
 
     const removeTagListener =
         $scope.$on(Events.filters.removeTag, function (event, filter, tag) {

@@ -142,6 +142,7 @@ const RHSAS_CVES = {
         synopsis: 'ntp security update',
         severity: 'moderate',
         systems_affected: 2,
+        issued: '2017-10-26',
         summary: 'An update for ntp is now available for Red Hat Enterprise Linux ' +
                  '6.<br/>Red Hat Product Security has rated this update as having ' +
                  'a security impact of Moderate. A Common Vulnerability Scoring ' +
@@ -164,6 +165,7 @@ const RHSAS_CVES = {
         synopsis: 'kernel security update',
         severity: 'important',
         systems_affected: 1,
+        issued: '2018-01-03',
         summary:'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description: `
             An industry-wide issue was found in the way many modern microprocessor designs
@@ -179,6 +181,8 @@ const RHSAS_CVES = {
         type: 'Security Advisory',
         synopsis: 'kernel security update',
         severity: 'important',
+        systems_affected: 2,
+        issued: '2017-09-12',
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description:`
             A stack buffer overflow flaw was found in the way the Bluetooth subsystem of
@@ -193,6 +197,8 @@ const RHSAS_CVES = {
         type: 'Security Advisory',
         synopsis: 'kernel security update',
         severity: 'important',
+        systems_affected: 2,
+        issued: '2017-06-19',
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description:`
         A flaw was found in the way memory was being allocated on the stack for
@@ -212,6 +218,8 @@ const RHSAS_CVES = {
         type: 'Security Advisory',
         synopsis: 'kernel security update',
         severity: 'important',
+        systems_affected: 2,
+        issued: '2017-10-19',
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description:`
         Security Fix(es):
