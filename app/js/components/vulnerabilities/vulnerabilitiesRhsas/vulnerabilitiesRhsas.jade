@@ -22,7 +22,7 @@
         tr(ng-repeat="rhsa in rhsas")
           td.fit-content.nowrap(translate) 
             a {{:: rhsa.id}}
-          td.fit-content.nowrap(translate)
+          td.fit-content.nowrap.severity-rhsa(translate)
             .icon-inline
               i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
               span {{:: rhsa.severity}}
@@ -30,5 +30,5 @@
           td.fit-content.nowrap.text-center(translate) {{rhsa.systems_affected}}
           td.fit-content.nowrap(translate) {{:: rhsa.issued}}
           td.fit-content.nowrap.text-center
-            i.fa.fa-stethoscope(ng-class="{hasRuleHit: rhsa.rule_hits > 0}")
+            vulnerability-icon(rhsa="rhsa")
 
