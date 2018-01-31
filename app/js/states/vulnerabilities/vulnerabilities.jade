@@ -10,11 +10,11 @@
         table
           thead
             tr
-              th.min.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
+              th.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
                 ng-click="sort('toString')", translate) Package Name
-              th.text-center.min.fit-content.nowrap.sortable(translate) RHSAs
-              th.text-center.min.fit-content.nowrap.sortable(translate) System Affected
-              th.text-center.min.fit-content.nowrap.sortable(translate) Release Date
+              th.text-center.fit-content.min.nowrap.sortable(translate) RHSAs
+              th.text-center.fit-content.min.nowrap.sortable(translate) System Affected
+              th.text-center.fit-content.min.nowrap.sortable(translate) Release Date
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
