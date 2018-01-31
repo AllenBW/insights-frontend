@@ -12,22 +12,23 @@
     table
       thead
         tr
-          th.min.fit-content.nowrap.sortable(translate) RHSA ID
-          th.min.fit-content.nowrap.sortable(translate) Severity
-          th.text-center.min.fit-content.nowrap.sortable(translate) CVEs
-          th.text-center.min.fit-content.nowrap.sortable(translate) Systems Affected
-          th.min.fit-content.nowrap.sortable(translate) Issued
-          th.text-center.min.fit-content.nowrap.sortable(translate) Rule Hit
+          th.fit-content.nowrap.sortable(translate) RHSA ID
+          th.fit-content.min.nowrap.sortable(translate) Severity
+          th.fit-content.min.nowrap.sortable.text-center(translate) CVEs
+          th.fit-content.min.nowrap.sortable.text-center(translate) Systems Affected
+          th.fit-content.min.nowrap.sortable(translate) Issued
+          th.fit-content.min.nowrap.sortable.text-center(translate) Rule Hit
       tbody
         tr(ng-repeat="rhsa in rhsas")
-          td.min.fit-content.nowrap(translate) {{:: rhsa.id}}
+          td.fit-content.nowrap(translate) 
+            a {{:: rhsa.id}}
           td.fit-content.nowrap(translate)
             .icon-inline
               i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
               span {{:: rhsa.severity}}
-          td.text-center.fit-content.nowrap(translate) {{rhsa.cves.length}}
-          td.text-center.fit-content.nowrap(translate) {{rhsa.systems_affected}}
+          td.fit-content.nowrap.text-center(translate) {{rhsa.cves.length}}
+          td.fit-content.nowrap.text-center(translate) {{rhsa.systems_affected}}
           td.fit-content.nowrap(translate) {{:: rhsa.issued}}
-          td.text-center.fit-content.nowrap
+          td.fit-content.nowrap.text-center
             i.fa.fa-stethoscope(ng-class="{hasRuleHit: rhsa.rule_hits > 0}")
 
