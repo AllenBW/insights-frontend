@@ -116,6 +116,7 @@ function vulnerabilitiesPackageViewCtrl($scope,
     const RhsaFilterListener = $scope.$on(Events.filters.rhsaSeverity,
         function (event, filter) {
             if (filter.length === 0) {
+                $scope.rhsas = _allRhsas;
                 return;
             }
 

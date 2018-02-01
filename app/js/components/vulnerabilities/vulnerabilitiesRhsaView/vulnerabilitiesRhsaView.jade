@@ -1,0 +1,11 @@
+.page-vulnerabilities-package(ng-if='!loading')
+  section.header
+    page-header(title="{{:: rhsa.id}}", subtitle="pageHeaderSubtitle")
+    .description
+      span {{:: rhsa.description}}
+
+  .content-wrap
+    .table-header
+      table-filters
+        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+        rhsa-severity-select

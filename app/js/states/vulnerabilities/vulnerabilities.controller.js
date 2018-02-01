@@ -49,7 +49,6 @@ function VulnerabilitiesCtrl($filter,
         } else if ($scope.selectedView === $scope.views.rhsa) {
             Vulnerability.getAllRHSAs(params).then((vulnerabilities) => {
                 $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
-                console.log(_allVulnerabilities);
                 order();
                 $scope.loading = false;
             });

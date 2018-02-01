@@ -5,6 +5,10 @@
       p TODO: Insert Package description in vmaas.js mock data
 
   .content-wrap
+    .table-header
+      table-filters
+        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+        rhsa-severity-select
     // TODO make Summary Card a component
     .card-list-tiles.card-list-rhsa
       card.card-rhsa(ng-repeat='rhsa in rhsas', ng-click='indexMe($index + 1); toggleShowCVEs(rhsa)', ng-class='{active: isSelected(rhsa)}', style="order: {{$index + 1}}")
