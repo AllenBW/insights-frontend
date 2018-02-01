@@ -26,7 +26,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-rhsas({package_id: vulnerability.id, package: vulnerability})') {{:: vulnerability.name}}
+                a(ui-sref='app.vulnerabilities-packages({package_id: vulnerability.id})') {{:: vulnerability.name}}
               td.text-center.fit-content.nowrap
                 span {{vulnerability.systems.length}}
               td.text-center.fit-content.nowrap
