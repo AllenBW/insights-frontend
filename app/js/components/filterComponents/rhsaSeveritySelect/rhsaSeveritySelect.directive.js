@@ -17,9 +17,8 @@ function rhsaSeveritySelectCtrl($rootScope,
                                 RhsaSeverityFilters,
                                 FilterService) {
     const optionsMap = {};
-    let menu = null;
-    $scope.options = [];
-    angular.extend($scope.options, RhsaSeverityFilters);
+
+    $scope.options = angular.extend([], RhsaSeverityFilters);
 
     // Add selected to each option to be used as the checkbox
     // ng-model. makes options map in both directions
@@ -33,16 +32,6 @@ function rhsaSeveritySelectCtrl($rootScope,
     // default option is showing all rhsas
     // index for $scope.options
     const DEFAULT_OPTION = 0;
-
-    $scope.openMenu = function ($mdMenu, event) {
-        if (!menu) {
-            menu = $mdMenu;
-            $mdMenu.open(event);
-        } else {
-            $mdMenu.close();
-            menu = null;
-        }
-    };
 
     /**
      * Returns the string representation for one or more selected options.
@@ -63,12 +52,15 @@ function rhsaSeveritySelectCtrl($rootScope,
 
     function setURL() {
         let str = '';
+        let tags = [];
         $scope.options.forEach(function (option, index) {
             if (option.selected && str === '' &&
                 index !== DEFAULT_OPTION) {
                 str = option.title;
+                tags.push(option.tag);
             } else if (option.selected && index !== DEFAULT_OPTION) {
                 str += `,${option.title}`;
+                tags.push(option.tag);
             }
         });
 
@@ -81,11 +73,8 @@ function rhsaSeveritySelectCtrl($rootScope,
 
         FilterService.doFilter();
         $rootScope.$broadcast(Events.filters.rhsaSeverity, str);
-        filter($scope.options, {selected: true}).forEach((option) => {
-            $rootScope.$broadcast(Events.filters.tag,
-                              option.tag,
-                              Events.filters.rhsaSeverity);
-        });
+        $rootScope.$broadcast(Events.filters.multipleTags, tags,
+                      Events.filters.rhsaSeverity);
 
         return str;
     }
@@ -97,10 +86,6 @@ function rhsaSeveritySelectCtrl($rootScope,
     $scope.$watch('options', setSelectedOptions, true);
 
     function setSelectedOptions(newVal, old) {
-        if (newVal === old) {
-            return;
-        }
-
         if (newVal[DEFAULT_OPTION].selected && !old[DEFAULT_OPTION].selected) {
             setDefaultOption();
             return;
@@ -109,7 +94,8 @@ function rhsaSeveritySelectCtrl($rootScope,
         let isOptionSelected = false;
         $scope.options.forEach(function (option, index) {
             // if something other than all is selected than All is deselected
-            if (option.selected && index !== DEFAULT_OPTION) {
+            if (!isOptionSelected && option.selected &&
+                index !== DEFAULT_OPTION) {
                 isOptionSelected = true;
                 $scope.options[DEFAULT_OPTION].selected = false;
             }
@@ -118,8 +104,6 @@ function rhsaSeveritySelectCtrl($rootScope,
         if (!isOptionSelected) {
             $scope.options[DEFAULT_OPTION].selected = true;
         }
-
-        $scope.doFilter();
     }
 
     /**
@@ -156,19 +140,20 @@ function rhsaSeveritySelectCtrl($rootScope,
         }
     })();
 
-    const resetFilterListener = $scope.$on(Events.filters.reset, setDefaultOption);
-
-    const removeTagListener =
-        $scope.$on(Events.filters.removeTag, function (event, filter, tag) {
-            if (filter === Events.filters.rhsaSeverity) {
-                find($scope.options, {tag: tag}).selected = false;
-                setSelectedOptions();
-                $scope.doFilter();
-            }
-        });
-
     // applies filter when the menu closes
     const menuCloseListener = $scope.$on('$mdMenuClose', $scope.doFilter);
+    const resetFilterListener = $scope.$on(Events.filters.reset, setDefaultOption);
+    const removeTagListener =
+        $scope.$on(Events.filters.removeMultipleTags, function (event, filter, tag) {
+            if (filter === Events.filters.rhsaSeverity) {
+                if ($scope.options[DEFAULT_OPTION].tag === tag) {
+                    setDefaultOption();
+                } else {
+                    find($scope.options, {tag: tag}).selected = false;
+                    $scope.doFilter();
+                }
+            }
+        });
 
     // removes all listeners when $scope is destroyed
     $scope.$on('$destroy', function () {

@@ -286,6 +286,15 @@ const PACKAGES_NO_CVES = [{
     moderate_count: 1,
     low_count: 0,
     version: '4.0',
+    description: `
+        The Network Time Protocol (NTP) is used to synchronize a computer's
+        time with another reference time source. This package includes ntpd
+        (a daemon which continuously adjusts system time) and utilities used
+        to query and configure the ntpd daemon.
+
+        Perl scripts ntp-wait and ntptrace are in the ntp-perl package,
+        ntpdate is in the ntpdate package and sntp is in the sntp package.
+        The documentation is in the ntp-doc package.`,
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
     rhsas: [RHSAS_CVES['RHSA-2017:3071']]
 }, {
@@ -297,6 +306,12 @@ const PACKAGES_NO_CVES = [{
     moderate_count: 0,
     low_count: 0,
     version: '3.10.0-693',
+    description: `
+        The kernel is the essential center of a computer system the core
+        that provides basic services for all other parts of the operating
+        system. A synonym is nucleus. A kernel can be contrasted with a
+        shell, the outermost part of an operating system that interacts
+        with user commands.`,
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
     rhsas: [RHSAS_CVES['RHSA-2017:2930'], RHSAS_CVES['RHSA-2017:1484'],
             RHSAS_CVES['RHSA-2017:2679'], RHSAS_CVES['RHSA-2018:0007']]

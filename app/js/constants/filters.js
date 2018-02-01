@@ -48,6 +48,21 @@ constantsModule.constant('RuleStatusFilters', {
     }
 });
 
+constantsModule.constant('RuleHitFilters', {
+    all: {
+        title: 'All',
+        tag: null
+    },
+    ruleHit: {
+        title: 'Rule Hit',
+        tag: 'Insights Rule Hit: Has Rule Hits'
+    },
+    noRuleHit: {
+        title: 'No Rule Hit',
+        tag: 'Insights Rule Hit: No Rule Hits'
+    }
+});
+
 constantsModule.constant('LikelihoodFilters', [
     {
         title: 'All',
