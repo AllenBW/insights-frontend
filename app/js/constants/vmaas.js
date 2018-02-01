@@ -49,7 +49,7 @@ const CVES = {
         description: 'A vulnerability was discovered in the NTP server\'s ' +
              'parsing of configuration directives. A remote, authenticated ' +
              'attacker could cause ntpd to crash by sending a crafted message.' +
-             '<br/>Find out more about CVE-2017-6463 from the MITRE CVE dictionary' +
+             'Find out more about CVE-2017-6463 from the MITRE CVE dictionary' +
              ' and NIST NVD.',
         systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
         link: 'https://access.redhat.com/security/cve/CVE-2017-6463'
@@ -355,6 +355,7 @@ const PACKAGES_NO_CVES = [{
 }];
 
 constantsModule.constant('VMAAS_PACKAGES_NOCVE', PACKAGES_NO_CVES);
+constantsModule.constant('VMAAS_RHSAS_OBJECT', RHSAS_CVES);
 
 constantsModule.constant('VMAAS_CVES', (function () {
     const array = [];

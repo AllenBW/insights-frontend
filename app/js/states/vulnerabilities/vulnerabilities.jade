@@ -8,6 +8,7 @@
                  on-search='search(model)')
       search-box(ng-show="selectedView === views.rhsa", placeholder="{{'Search RHSAs' | translate}}",
                  on-search='search(model)')
+      rhsa-severity-select(ng-show="selectedView === views.rhsa")
       search-box(ng-show="selectedView === views.cve", placeholder="{{'Search CVEs' | translate}}",
                  on-search='search(model)')
 
@@ -22,7 +23,7 @@
 
   // TODO make embedded card a component
   .content-wrap
-      .vulnerabilities-package-view(ng-if="!loading", ng-show="selectedView === views.package")
+      .vulnerabilities-package-view(ng-if="!loading && selectedView === views.package")
         table
           thead
             tr
@@ -35,7 +36,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-packages({package_id: vulnerability.id})') {{:: vulnerability.name}}
+                a(ui-sref='app.vulnerabilities-package({package_id: vulnerability.id})') {{:: vulnerability.name}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap
@@ -44,7 +45,7 @@
                 span {{:: vulnerability.cve_count}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.release_date}}
-      .vulnerabilities-rhsa-view(ng-if="!loading", ng-show="selectedView === views.rhsa")
+      .vulnerabilities-rhsa-view(ng-if="!loading && selectedView === views.rhsa")
         table
           thead
             tr
@@ -57,7 +58,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a {{:: vulnerability.id}}
+                a(ui-sref='app.vulnerabilities-rhsa({rhsa_id: vulnerability.id})') {{:: vulnerability.id}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap
@@ -66,7 +67,7 @@
                 span {{:: vulnerability.cve_count}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.issued}}
-      .vulnerabilities-cve-view(ng-if="!loading", ng-show="selectedView === views.cve")
+      .vulnerabilities-cve-view(ng-if="!loading && selectedView === views.cve")
         table
           thead
             tr
