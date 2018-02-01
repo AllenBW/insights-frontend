@@ -115,7 +115,6 @@ function rhsaSeveritySelectCtrl($rootScope,
         });
 
         $scope.options[DEFAULT_OPTION].selected = true;
-        $scope.doFilter();
     }
 
     /**
