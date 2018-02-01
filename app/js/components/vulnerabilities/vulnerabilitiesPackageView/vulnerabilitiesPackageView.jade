@@ -1,0 +1,56 @@
+.page-vulnerabilities-package(ng-if='!loading')
+  section.header
+    page-header(title="{{:: package_name}}")
+    .description
+      p TODO: Insert Package description in vmaas.js mock data
+
+  .content-wrap
+    // TODO make Summary Card a component
+    .card-list-tiles.card-list-rhsa
+      card.card-rhsa(ng-repeat='rhsa in rhsas', ng-click='indexMe($index + 1); selectRHSA(rhsa)', ng-class='{active: isSelected(rhsa)}', style="order: {{$index + 1}}")
+        card-content
+          .icon
+            i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
+          h2.text {{ rhsa.id }}
+          .cve-count
+            span {{ rhsa.cves.length }} CVEs
+            .pipe |
+            span.hits  {{ getRuleHits(rhsa) }}
+              i.fa.fa-book(tooltip="{{'This RHSA has an insights rule hit' | translate}}")
+
+      card.card-cve-summary(ng-show='selectedRHSA', style="order: {{cveOrder}}")
+        card-content(ng-if='inPackage(package)')
+          card.rule-hit(expandable='true', ng-if="selectedCVE.insights_rule")
+            card-header-expandable
+              .title.icon-inline
+                i.fa.fa-book(aria-hidden='true')
+                span Insights Rule Hit
+            card-content.card-content(collapse="card.collapsed")
+              .spinner.spinner-sm(ng-if='loadingRule')
+              incident-icon(rule-id='report.rule_id', ng-if='selectedRule && !loadingRule')
+              .title(ng-if='selectedRule && !loadingRule')
+                a(ng-click='goToRule()') {{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
+
+          ul.cve-id
+            li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
+              a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
+              i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
+
+          .description
+            trimmed-text(length="300", text="{{selectedCVE.description}}")
+            a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
+              i.fa.fa-external-link
+          .cve-information
+            .impact
+              b Impact:
+              |  {{ selectedCVE.impact }}
+            .public-date
+              b Public-Date:
+              |  {{ selectedCVE.public_date }}
+            .iava(ng-if='selectedCVE.iava')
+              b IAVA:
+              |  {{ selectedCVE.iava }}
+            .cwe(ng-if='selectedCVE.cwe')
+              b CWE:
+              |  {{ selectedCVE.cwe }}
+

@@ -6,13 +6,17 @@ const findAll = require('lodash/filter');
 /**
  * @ngInject
  */
-function VulnerabilitiesRhsasCtrl($scope,
+function vulnerabilitiesPackageViewCtrl($scope,
                                   $stateParams,
                                   Vulnerability,
                                   Events) {
     const package_id = $stateParams.package_id;
     let _allRhsas;
     $scope.loading = false;
+
+    $scope.selectRHSA = function (rhsa) {
+        $scope.selectedRHSA = rhsa;
+    };
 
     // TODO server side search
     $scope.search = function (model) {
@@ -51,4 +55,5 @@ function VulnerabilitiesRhsasCtrl($scope,
     $scope.$on('$destroy', RhsaFilterListener);
 }
 
-componentsModule.controller('VulnerabilitiesRhsasCtrl', VulnerabilitiesRhsasCtrl);
+componentsModule.controller('vulnerabilitiesPackageViewCtrl', 
+  vulnerabilitiesPackageViewCtrl);

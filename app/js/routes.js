@@ -154,11 +154,11 @@ function Routes($stateProvider) {
             title: 'Vulnerabilities'
         })
 
-        .state('app.vulnerabilities-rhsas', {
+        .state('app.vulnerabilities-packages', {
             url: '/vulnerabilities/:package_id/rhsas',
-            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsas' +
-            '/vulnerabilitiesRhsas.html',
-            controller: 'VulnerabilitiesRhsasCtrl',
+            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesPackageView' +
+            '/vulnerabilitiesPackageView.html',
+            controller: 'vulnerabilitiesPackageViewCtrl',
             title: 'Vulnerabilities'
         });
 
