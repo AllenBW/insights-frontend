@@ -85,3 +85,17 @@ $card-footer: "md-card-footer";
 .severity-rhsa {
   text-transform: capitalize;
 }
+
+.view-switcher { 
+  @include rem('margin-right', $global-padding);
+  margin-left: auto; 
+  a { 
+    @include rem('padding', 5px $global-padding);
+    @include rem('margin-left', $global-padding);
+    &.active { 
+      background: $primary;
+      border-radius: 25px;
+      color: #fff;
+    }
+  }
+}
