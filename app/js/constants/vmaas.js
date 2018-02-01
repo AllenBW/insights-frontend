@@ -285,6 +285,8 @@ const PACKAGES_NO_CVES = [{
     important_count: 0,
     moderate_count: 1,
     low_count: 0,
+    rhsa_count: 1,
+    cve_count: RHSAS_CVES['RHSA-2017:3071'].cves.length,
     version: '4.0',
     description: `
         The Network Time Protocol (NTP) is used to synchronize a computer's
@@ -305,6 +307,11 @@ const PACKAGES_NO_CVES = [{
     important_count: 4,
     moderate_count: 0,
     low_count: 0,
+    rhsa_count: 4,
+    cve_count: RHSAS_CVES['RHSA-2017:2930'].cves.length +
+                RHSAS_CVES['RHSA-2017:1484'].cves.length +
+                RHSAS_CVES['RHSA-2017:2679'].cves.length +
+                RHSAS_CVES['RHSA-2018:0007'].cves.length,
     version: '3.10.0-693',
     description: `
         The kernel is the essential center of a computer system the core
