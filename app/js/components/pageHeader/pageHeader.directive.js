@@ -23,7 +23,7 @@ function pageHeader() {
         replace: true,
         controller: pageHeaderCtrl,
         scope: {
-            title: '=',
+            title: '@',
             icon: '@',
             subtitle: '='
         }

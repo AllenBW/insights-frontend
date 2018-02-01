@@ -28,7 +28,6 @@ function vulnerabilitiesPackageViewCtrl($scope,
     };
 
     function initPageHeader() {
-        $scope.pageHeaderTitle = $scope.package.name;
         $scope.pageHeaderSubtitle = [`Release Date: ${$scope.package.release_date}`,
                            `Version: ${$scope.package.version}`,
                            `RHSA Count: ${$scope.package.rhsa_count}`,
