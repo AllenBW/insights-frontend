@@ -3,3 +3,5 @@ section.page-header(ng-transclude)
     h1
       i.fa(class="{{:: icon}}", aria-hidden='true')
       span.text(translate) {{:: titleTranslated}}
+      //- subtitle is an array
+      span.text(ng-repeat="subtitle_part in subtitle", translate) {{:: subtitle_part }}

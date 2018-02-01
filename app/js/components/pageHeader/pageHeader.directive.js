@@ -23,8 +23,9 @@ function pageHeader() {
         replace: true,
         controller: pageHeaderCtrl,
         scope: {
-            title: '@',
-            icon: '@'
+            title: '=',
+            icon: '@',
+            subtitle: '='
         }
     };
 }
