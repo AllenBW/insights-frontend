@@ -27,6 +27,9 @@ const CVES = {
         public_date: '2017-03-21',
         iava: '2017-A-0084',
         cwe: 'CWE-20',
+        systems_affected: 2,
+        rhsa_count: 1,
+        package_count: 1,
         description: 'A vulnerability was found in NTP, in the parsing of ' +
              'packets from the /dev/datum device. A malicious device could send ' +
              'crafted messages, causing ntpd to crash. Find out more about ' +
@@ -40,12 +43,15 @@ const CVES = {
         public_date: '2017-03-21',
         iava: '2017-A-0084',
         cwe: 'CWE-20',
+        systems_affected: 2,
+        rhsa_count: 1,
+        package_count: 1,
         description: 'A vulnerability was discovered in the NTP server\'s ' +
              'parsing of configuration directives. A remote, authenticated ' +
              'attacker could cause ntpd to crash by sending a crafted message.' +
              '<br/>Find out more about CVE-2017-6463 from the MITRE CVE dictionary' +
              ' and NIST NVD.',
-        systems: [],
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
         link: 'https://access.redhat.com/security/cve/CVE-2017-6463'
     },
     'CVE-2017-5754': {
@@ -54,6 +60,9 @@ const CVES = {
         public_date: '2018-01-03',
         iava: null,
         cew: null,
+        systems_affected: 2,
+        rhsa_count: 1,
+        package_count: 1,
         description: `
             An industry-wide issue was found in the way many modern microprocessor designs
             have implemented speculative execution of instructions (a commonly used
@@ -80,6 +89,9 @@ const CVES = {
         public_date: '2017-09-12',
         iava: null,
         cwe: 'CWE-121',
+        systems_affected: 2,
+        rhsa_count: 1,
+        package_count: 1,
         description: `
         A stack buffer overflow flaw was found in the way the Bluetooth subsystem
         of the Linux kernel processed pending L2CAP configuration responses from
@@ -104,6 +116,9 @@ const CVES = {
         public_date: '2017-06-19',
         iava: null,
         cwe: null,
+        systems_affected: 2,
+        rhsa_count: 1,
+        package_count: 1,
         description: `
         A flaw was found in the way memory was being allocated on the stack for
         user space binaries. If heap (or different memory region) and stack memory
@@ -124,6 +139,9 @@ const CVES = {
         public_date: '2017-03-29',
         iava: null,
         cwe: 'CWE-122',
+        systems_affected: 2,
+        rhsa_count: 1,
+        package_count: 1,
         description: `
         Out-of-bounds kernel heap access vulnerability was found in xfrm,
         kernel's IP framework for transforming packets. An error dealing with
@@ -143,6 +161,8 @@ const RHSAS_CVES = {
         severity: 'moderate',
         systems_affected: 2,
         issued: '2017-10-26',
+        package_count: 1,
+        cve_count: 2,
         summary: 'An update for ntp is now available for Red Hat Enterprise Linux ' +
                  '6.<br/>Red Hat Product Security has rated this update as having ' +
                  'a security impact of Moderate. A Common Vulnerability Scoring ' +
@@ -166,6 +186,8 @@ const RHSAS_CVES = {
         severity: 'important',
         systems_affected: 1,
         issued: '2018-01-03',
+        package_count: 1,
+        cve_count: 1,
         summary:'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description: `
             An industry-wide issue was found in the way many modern microprocessor designs
@@ -183,6 +205,8 @@ const RHSAS_CVES = {
         severity: 'important',
         systems_affected: 2,
         issued: '2017-09-12',
+        package_count: 1,
+        cve_count: 1,
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description:`
             A stack buffer overflow flaw was found in the way the Bluetooth subsystem of
@@ -199,6 +223,8 @@ const RHSAS_CVES = {
         severity: 'important',
         systems_affected: 2,
         issued: '2017-06-19',
+        package_count: 1,
+        cve_count: 1,
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description:`
         A flaw was found in the way memory was being allocated on the stack for
@@ -220,6 +246,8 @@ const RHSAS_CVES = {
         severity: 'important',
         systems_affected: 2,
         issued: '2017-10-19',
+        package_count: 1,
+        cve_count: 1,
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
         description:`
         Security Fix(es):
@@ -287,6 +315,7 @@ const PACKAGES_NO_CVES = [{
     low_count: 0,
     rhsa_count: 1,
     cve_count: RHSAS_CVES['RHSA-2017:3071'].cves.length,
+    systems_affected: 2,
     version: '4.0',
     description: `
         The Network Time Protocol (NTP) is used to synchronize a computer's
@@ -303,6 +332,7 @@ const PACKAGES_NO_CVES = [{
     id: 1,
     name: 'kernel',
     release_date: '2014-06-10',
+    systems_affected: 2,
     critical_count: 0,
     important_count: 4,
     moderate_count: 0,
@@ -324,9 +354,25 @@ const PACKAGES_NO_CVES = [{
             RHSAS_CVES['RHSA-2017:2679'], RHSAS_CVES['RHSA-2018:0007']]
 }];
 
-constantsModule.constant('VMAAS_CVES', [CVES['CVE-2017-6462'],CVES['CVE-2017-6463']]);
-
 constantsModule.constant('VMAAS_PACKAGES_NOCVE', PACKAGES_NO_CVES);
+
+constantsModule.constant('VMAAS_CVES', (function () {
+    const array = [];
+    Object.keys(CVES).forEach(function (key) {
+        array.push(CVES[key]);
+    });
+
+    return array;
+})());
+
+constantsModule.constant('VMAAS_RHSAS', (function () {
+    const array = [];
+    Object.keys(RHSAS_CVES).forEach(function (key) {
+        array.push(RHSAS_CVES[key]);
+    });
+
+    return array;
+})());
 
 constantsModule.constant('VMAAS_PACKAGES', [{
     id: 0,

@@ -1,6 +1,6 @@
 'use strict';
 
-let constantsModule = require('./');
+const constantsModule = require('./');
 
 /**
  * tab name with corresponding tab index.

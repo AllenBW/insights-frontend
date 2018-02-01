@@ -15,12 +15,17 @@ function VulnerabilitiesCtrl($filter,
                              Utils,
                              Events,
                              Vulnerability,
-                             SystemModalTabs) {
+                             SystemModalTabs,
+                             VulnerabilitiesViews) {
 
+    const DEFAULT_VIEW = VulnerabilitiesViews.package;
     let _allVulnerabilities;
+
+    $scope.views = VulnerabilitiesViews;
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
     $scope.vulnerabilities = [];
+    $scope.selectedView = DEFAULT_VIEW;
 
     $scope.sorter = new Utils.Sorter({
         predicate: 'name',
@@ -31,20 +36,29 @@ function VulnerabilitiesCtrl($filter,
      * Queries GET:/vulnerabilities and populates table data
      */
     function getData () {
-        let machine_id = $location.search().machine;
-
         $scope.loading = true;
         let params = [];
         params.search_term = $scope.searchText;
 
-        Vulnerability.getAll(params).then((vulnerabilities) => {
-            $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
-            order();
-            $scope.loading = false;
-        });
-
-        if (machine_id) {
-            $scope.showSystem(machine_id);
+        if ($scope.selectedView === $scope.views.package) {
+            Vulnerability.getAll(params).then((vulnerabilities) => {
+                $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
+                order();
+                $scope.loading = false;
+            });
+        } else if ($scope.selectedView === $scope.views.rhsa) {
+            Vulnerability.getAllRHSAs(params).then((vulnerabilities) => {
+                $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
+                console.log(_allVulnerabilities);
+                order();
+                $scope.loading = false;
+            });
+        } else if ($scope.selectedView === $scope.views.cve) {
+            Vulnerability.getCVEs(params).then((vulnerabilities) => {
+                $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
+                order();
+                $scope.loading = false;
+            });
         }
     }
 
@@ -54,7 +68,6 @@ function VulnerabilitiesCtrl($filter,
         let offset = page * pageSize;
         let arrayEnd = offset + pageSize < $scope.allVulnerabilities.total ?
                 offset + pageSize : $scope.allVulnerabilities.total;
-
         $scope.vulnerabilities = $scope.allVulnerabilities.slice(offset, arrayEnd);
     }
 
@@ -64,8 +77,8 @@ function VulnerabilitiesCtrl($filter,
     }
 
     function order () {
-        $scope.allVulnerabilities.resources = $filter('orderBy')(
-            $scope.allVulnerabilities.resources,
+        $scope.allVulnerabilities = $filter('orderBy')(
+            $scope.allVulnerabilities,
             [($scope.sorter.reverse ?
                 '-' + $scope.sorter.predicate :
                 $scope.sorter.predicate)]);
@@ -73,13 +86,25 @@ function VulnerabilitiesCtrl($filter,
         reloadTable();
     }
 
+    $scope.changeView = function (view) {
+        if (view !== $scope.selectedView) {
+            $scope.selectedView = view;
+            getData();
+        }
+    };
+
     $scope.search = function (model) {
         if (!model || model === '') {
             $scope.allVulnerabilities = _allVulnerabilities;
         } else {
             $scope.allVulnerabilities = [];
             _allVulnerabilities.forEach((vulnerability) => {
-                if (vulnerability.name.indexOf(model) !== -1) {
+                if (($scope.selectedView === $scope.views.package &&
+                    vulnerability.name.indexOf(model) !== -1) ||
+                    ($scope.selectedView === $scope.views.rhsa &&
+                    vulnerability.id.indexOf(model) !== -1) ||
+                    ($scope.selectedView === $scope.views.cve &&
+                    vulnerability.id.indexOf(model) !== -1)) {
                     $scope.allVulnerabilities.push(vulnerability);
                 }
             });
@@ -88,12 +113,15 @@ function VulnerabilitiesCtrl($filter,
         reloadTable();
     };
 
-    $scope.showSystem = function (system_id) {
-        InventoryService.showSystemModal({system_id: system_id}, true,
-                                         SystemModalTabs.vulnerabilities);
+    $scope.searchRHSAs = function (model) {
+        // TODO: rhsa search
+        console.log(model);
     };
 
-    getData();
+    $scope.searchCVEs = function (model) {
+        //TODO: cve search
+        console.log(model);
+    };
 
     const reloadDataListener = $scope.$on('reload:data', getData);
     const filterResetListener = $scope.$on(Events.filters.reset, getData);
@@ -101,6 +129,8 @@ function VulnerabilitiesCtrl($filter,
         reloadDataListener();
         filterResetListener();
     });
+
+    getData();
 }
 
 statesModule.controller('VulnerabilitiesCtrl', VulnerabilitiesCtrl);
