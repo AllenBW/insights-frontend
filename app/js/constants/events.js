@@ -53,9 +53,12 @@ let _EVENT_ROOTS = [{
              'riskOfChangeSelect',
              'totalRisk',
              'tag',
+             'multipleTags',
+             'removeMultipleTags',
              'removeTag',
              'ansibleSupport',
              'ruleStatus',
+             'ruleHit',
              'likelihood',
              'impact']
 }, {

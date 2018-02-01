@@ -2,8 +2,7 @@
 'use strict';
 
 const componentsModule = require('../');
-const removeFromArray = require('lodash/remove');
-const find = require('lodash/find');
+const omitBy = require('lodash/omitBy');
 const priv = {};
 
 /**
@@ -17,30 +16,69 @@ function TableFiltersCtrl($element,
                                Events) {
 
     /**
-     * Removes tag from footer and broadcasts the event for reseting the filter
+     * Checks if the Events.filters has the property. if it doesn't,
+     * then that means the tag is the key and the filter can have
+     * multiple tags.
      */
-    $scope.removeFilter = function (tag) {
-        removeFromArray($scope.tags, tag);
-        $rootScope.$broadcast(Events.filters.removeTag, tag.filter, tag.tag);
-    };
-
-    $scope.hasTags = function () {
-        return $scope.tags.length > 0;
+    $scope.hasMultipleTags = function (key) {
+        return !Events.filters.hasOwnProperty(key);
     };
 
     /**
-     * listens for new tags and adds them to the footer as they come in
+     * Removes tag from footer and broadcasts the event for reseting the filter
+     *
+     * @param  {String} key   This will be the filter name if the filter can
+     *                        only have one tag. If not it will be the tag.
+     * @param  {String} value This will tag if the filter can only have one
+     *                        tag. If not it is the name of the filter
+     */
+    $scope.removeFilter = function (key, value) {
+        delete $scope.tags[key];
+
+        if ($scope.hasMultipleTags(key)) {
+            $rootScope.$broadcast(Events.filters.removeMultipleTags, value, key);
+        } else {
+            $rootScope.$broadcast(Events.filters.removeTag, key);
+        }
+    };
+
+    $scope.hasTags = function () {
+        return Object.keys($scope.tags).length > 0;
+    };
+
+    /**
+     * listens for new tags and adds them to the footer as they come in.
+     * Used when a filter can have one or more tags.
+     */
+    $scope.$on(Events.filters.multipleTags, function (event, tags, filter) {
+        if (tags.length === 0) {
+            omitBy($scope.tags, function (value, key) {
+                if (value === filter) {
+                    delete $scope.tags[key];
+                }
+            });
+        } else {
+            Object.keys($scope.tags).forEach(function (key) {
+                if (tags.indexOf(key) === -1 && $scope.tags[key] === filter) {
+                    delete $scope.tags[key];
+                }
+            });
+
+            tags.forEach(function (tag) {
+                $scope.tags[tag] = filter;
+            });
+        }
+    });
+
+    /**
+     * listens for new tags and adds them to the footer as they come in.
+     * Used when a filter can only have one tag.
      */
     $scope.$on(Events.filters.tag, function (event, tag, filter) {
-        const arrayTag = {
-            tag: tag,
-            filter: filter
-        };
+        $scope.tags[filter] = tag;
 
-        if (tag && !find($scope.tags, arrayTag)) {
-            $scope.tags.push(arrayTag);
-        } else if (!tag) {
-            removeFromArray($scope.tags, {filter: filter});
+        if (tag === null) {
+            delete $scope.tags[filter];
         }
     });
 
@@ -57,7 +95,7 @@ function TableFiltersCtrl($element,
     $element.bind('hidden.bs.collapse', priv.toggleTray);
 
     function init () {
-        $scope.tags = [];
+        $scope.tags = {};
     }
 
     init();
