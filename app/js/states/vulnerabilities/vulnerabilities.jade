@@ -2,8 +2,15 @@
   section
     page-header(title="Vulnerabilities", icon="fa-stethoscope")
 
-  table-filters
-    search-box(placeholder="{{'Search Packages' | translate}}", on-search='search(model)')
+  .table-header
+    table-filters
+      search-box(placeholder="{{'Search Packages' | translate}}", on-search='search(model)')
+
+    .view-switcher
+      b View by:
+      a.active Package
+      a RHSA
+      a CVE
 
   // TODO make embedded card a component
   .content-wrap
@@ -12,16 +19,19 @@
             tr
               th.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
                 ng-click="sort('toString')", translate) Package Name
+              th.text-center.fit-content.min.nowrap.sortable(translate) Systems
               th.text-center.fit-content.min.nowrap.sortable(translate) RHSAs
-              th.text-center.fit-content.min.nowrap.sortable(translate) System Affected
+              th.text-center.fit-content.min.nowrap.sortable(translate) CVEs
               th.text-center.fit-content.min.nowrap.sortable(translate) Release Date
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
                 a(ui-sref='app.vulnerabilities-rhsas({package_id: vulnerability.id, package: vulnerability})') {{:: vulnerability.name}}
               td.text-center.fit-content.nowrap
+                span {{vulnerability.systems.length}}
+              td.text-center.fit-content.nowrap
                 span {{vulnerability.rhsas.length}}
               td.text-center.fit-content.nowrap
-                span {{vulnerability.systems.length}}
+                span {{vulnerability.cves.length}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.release_date}}
