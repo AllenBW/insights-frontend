@@ -27,11 +27,20 @@ function vulnerabilitiesPackageViewCtrl($scope,
         });
     };
 
+    function initPageHeader() {
+        $scope.pageHeaderTitle = $scope.package.name;
+        $scope.pageHeaderSubtitle = [`Release Date: ${$scope.package.release_date}`,
+                           `Version: ${$scope.package.version}`,
+                           `RHSA Count: ${$scope.package.rhsa_count}`,
+                           `CVE Count: ${$scope.package.cve_count}`];
+    }
+
     function getData() {
         $scope.loading = true;
         Vulnerability.getPackage(package_id).then((pkg) => {
-            $scope.package_name = pkg.name;
+            $scope.package = pkg;
             $scope.rhsas = _allRhsas = pkg.rhsas;
+            initPageHeader();
             $scope.loading = false;
         });
     }
