@@ -55,5 +55,5 @@ function vulnerabilitiesPackageViewCtrl($scope,
     $scope.$on('$destroy', RhsaFilterListener);
 }
 
-componentsModule.controller('vulnerabilitiesPackageViewCtrl', 
+componentsModule.controller('vulnerabilitiesPackageViewCtrl',
   vulnerabilitiesPackageViewCtrl);
