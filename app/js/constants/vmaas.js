@@ -164,13 +164,13 @@ const RHSAS = {
         package_count: 1,
         cve_count: 2,
         summary: 'An update for ntp is now available for Red Hat Enterprise Linux ' +
-                 '6.<br/>Red Hat Product Security has rated this update as having ' +
+                 '6. Red Hat Product Security has rated this update as having ' +
                  'a security impact of Moderate. A Common Vulnerability Scoring ' +
                  'System (CVSS) base score, which gives a detailed severity ' +
                  'rating, is available for each vulnerability from the CVE ' +
                  'link(s) in the References section.',
         description: 'An update for ntp is now available for Red Hat Enterprise ' +
-                 'Linux 6.<br/>Red Hat Product Security has rated this update as ' +
+                 'Linux 6. Red Hat Product Security has rated this update as ' +
                  'Scoring having a security impact of Moderate. A Common ' +
                  'Vulnerability System (CVSS) base score, which gives a detailed ' +
                  'severity rating, is available for each vulnerability from the ' +

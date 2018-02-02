@@ -14,9 +14,7 @@
 
   .vulnerability-tables
     .primary
-      table-filters
-        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
-      table(ng-if='getListType() === listTypes.table')
+      table
         thead
           tr
             th.min
@@ -25,21 +23,30 @@
                 type="checkbox",
                 aria-label='Select All Systems Checkbox',
                 md-indeterminate="checkboxes.indeterminate",
-                ng-model='checkboxes.checked')
-            th.min.sortable Type
-            th.sortable Name
-            th.min.sortable Release Date
+                ng-model='checkboxes.checked',
+                ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, rhsa.systems)')
+            th.min.sortable(translate) Type
+            th.sortable(translate) Name
+            th.min.sortable(translate) Last Check In
 
         tbody
-          tr
+          tr(ng-click='checkboxes.rowClick($event, system.system_id)',
+             ng-mousedown='checkboxes.rowClick($event, system.system_id)',
+             ng-class="{'stale': !system.isCheckingIn}",
+             ng-repeat='system in rhsa.systems track by system.system_id',
+             data-id="{{:: system.system_id}}")
             td.min
               md-checkbox.md-accent.md-hue-1.md-checkbox-list(
                 type='checkbox',
-                aria-label='Select System Checkbox')
-            td.fit-content Type
+                aria-label='Select System Checkbox',
+                ng-model='checkboxes.items[system.system_id]',
+                ng-click='checkboxes.rowClick($event, system.system_id); $event.stopPropagation();',
+              )
+            td.fit-content
+              type-icon(type-id='system.system_type_id', include-text='true')
             td.break
-              a System
-            td.fit-content 0000-00-00
+              a(ng-click='showSystem(system)') {{:: system.toString }}
+            td.fit-content {{:: system.last_check_in | timeAgo}}
     .secondary
       table
           thead
