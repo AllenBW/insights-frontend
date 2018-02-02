@@ -1,9 +1,9 @@
 .page-vulnerabilities-package(ng-if='!loading')
-  section.vulnerability-details
+  section.vulnerability-details-header
     page-header(title="Package: {{:: package.name}}", subtitle="pageHeaderSubtitle")
-    .supporting-text test test
+    .page-header-aside test test
     .description test test
-    .affected-products test test
+    .description-aside test test
 
   table-filters
     search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
