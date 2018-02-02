@@ -140,6 +140,8 @@ $card-footer: "md-card-footer";
 
 .page-vulnerabilities-package {
 
+  .page-title i.fa { margin: 0px; }
+
   .card-vulnerabilities { @include rem('margin', 15px); }
 
   .cve-count { 
@@ -190,3 +192,46 @@ $card-footer: "md-card-footer";
     .card-header-risk-summaries { @include rem('margin-top', 5px); }
   }
 }
+
+
+// Detail Grid
+//==================================================================*/
+
+.vulnerability-details {
+  max-width: 1400px;
+  display: grid;
+  grid-gap: $global-padding;
+  grid-template-areas: "page-header supporting-text"
+                      "description affected-products";
+
+  grid-template-columns: 1fr;
+
+
+  @include media-query(sm){
+    display: grid;
+    grid-template-areas: "page-header supporting-text"
+                          "description affected-products";
+    grid-template-columns: 2fr 1fr;
+  }
+
+  grid-gap: $global-margin;
+  @include rem('margin', 0 $global-margin);
+
+  .page-header {
+    grid-area: page-header;
+    margin-left: 0px;
+  }
+  .supporting-text{
+    grid-area: supporting-text;
+    @include rem ('padding', $global-margin 0);
+  }
+  .description {
+    grid-area: description;
+  }
+  .affected-products{
+    grid-area: affected-products;
+  }
+
+}
+
+
