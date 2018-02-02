@@ -153,7 +153,7 @@ const CVES = {
     }
 };
 
-const RHSAS_CVES = {
+const RHSAS = {
     'RHSA-2017:3071': {
         id: 'RHSA-2017:3071',
         type: 'Security Advisory',
@@ -175,8 +175,25 @@ const RHSAS_CVES = {
                  'Vulnerability System (CVSS) base score, which gives a detailed ' +
                  'severity rating, is available for each vulnerability from the ' +
                  'CVE link(s) in the References section.',
-        solution: 'https://access.redhat.com/articles/11258',
+        solution: `
+            For details on how to apply this update, which includes the changes
+            described in this advisory, refer to:
+
+            https://access.redhat.com/articles/11258
+
+            After installing this update, the ntpd daemon will restart automatically.
+        `,
         cves: [CVES['CVE-2017-6462'], CVES['CVE-2017-6463']],
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        affected_products: ['Red Hat Enterprise Linux Server 6 x86_64',
+                    'Red Hat Enterprise Linux Server 6 i386',
+                    'Red Hat Enterprise Linux Workstation 6 x86_64',
+                    'Red Hat Enterprise Linux Workstation 6 i386',
+                    'Red Hat Enterprise Linux Desktop 6 x86_64',
+                    'Red Hat Enterprise Linux Desktop 6 i386',
+                    'Red Hat Enterprise Linux for IBM z Systems 6 s390x',
+                    'Red Hat Enterprise Linux for Power, big endian 6 ppc64',
+                    'Red Hat Enterprise Linux for Scientific Computing 6 x86_64'],
         rule_hits: 0
     },
     'RHSA-2018:0007': {
@@ -184,7 +201,7 @@ const RHSAS_CVES = {
         type: 'Security Advisory',
         synopsis: 'kernel security update',
         severity: 'important',
-        systems_affected: 1,
+        systems_affected: 2,
         issued: '2018-01-03',
         package_count: 1,
         cve_count: 1,
@@ -194,8 +211,22 @@ const RHSAS_CVES = {
             have implemented speculative execution of instructions (a commonly used
             performance optimization). There are three primary variants of the issue which
             differ in the way the speculative execution can be exploited.`,
-        solution: 'https://access.redhat.com/articles/11258',
+        solution: `
+            For details on how to apply this update, which includes the changes
+            described in this advisory, refer to:
+
+            https://access.redhat.com/articles/11258
+
+            The system must be rebooted for this update to take effect.
+        `,
         cves: [CVES['CVE-2017-5754']],
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        affected_products: ['Red Hat Enterprise Linux Server 7 x86_64',
+                    'Red Hat Enterprise Linux Server - AUS 7.4 x86_64',
+                    'Red Hat Enterprise Linux Workstation 7 x86_64',
+                    'Red Hat Enterprise Linux Desktop 7 x86_64',
+                    'Red Hat Enterprise Linux for IBM z Systems 7 s390x',
+                    'Red Hat Enterprise Linux for Power, big endian 7 ppc64'],
         rule_hits: 1
     },
     'RHSA-2017:2679': {
@@ -212,8 +243,19 @@ const RHSAS_CVES = {
             A stack buffer overflow flaw was found in the way the Bluetooth subsystem of
             the Linux kernel processed pending L2CAP configuration responses from
             a client.`,
-        solution: 'https://access.redhat.com/articles/11258',
+        solution: `
+            For details on how to apply this update, which includes the changes
+            described in this advisory, refer to:
+
+            https://access.redhat.com/articles/11258
+
+            The system must be rebooted for this update to take effect.`,
         cves: [CVES['CVE-2017-1000251']],
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        affected_products: ['Red Hat Enterprise Linux Server 7 x86_64',
+                    'Red Hat Enterprise Linux Server - AUS 7.4 x86_64',
+                    'Red Hat Enterprise Linux Workstation 7 x86_64',
+                    'Red Hat Enterprise Linux Desktop 7 x86_64'],
         rule_hits: 1
     },
     'RHSA-2017:1484': {
@@ -235,8 +277,21 @@ const RHSAS_CVES = {
         This is a kernel-side mitigation which increases the stack guard gap size
         from one page to 1 MiB to make successful exploitation of this issue
         more difficult.`,
-        solution: 'https://access.redhat.com/articles/11258',
+        solution: `
+            For details on how to apply this update, which includes the changes
+            described in this advisory, refer to:
+
+            https://access.redhat.com/articles/11258
+
+            The system must be rebooted for this update to take effect.
+        `,
         cves: [CVES['CVE-2017-1000364']],
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        affected_products: ['Red Hat Enterprise Linux Server 7 x86_64',
+                    'Red Hat Enterprise Linux Workstation 7 x86_64',
+                    'Red Hat Enterprise Linux Desktop 7 x86_64',
+                    'Red Hat Enterprise Linux for IBM z Systems 7 s390x',
+                    'Red Hat Enterprise Linux Server - AUS 7.4 x86_64'],
         rule_hits: 1
     },
     'RHSA-2017:2930': {
@@ -299,8 +354,21 @@ const RHSAS_CVES = {
         A divide-by-zero vulnerability was found in the __tcp_select_window function in
         the Linux kernel. This can result in a kernel panic causing a local denial
         of service.`,
-        solution: 'https://access.redhat.com/articles/11258',
+        solution: `
+            For details on how to apply this update, which includes the changes
+            described in this advisory, refer to:
+
+            https://access.redhat.com/articles/11258
+
+            The system must be rebooted for this update to take effect.
+        `,
         cves: [CVES['CVE-2017-7184']],
+        systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
+        affected_products: ['Red Hat Enterprise Linux Server 7 x86_64',
+                    'Red Hat Enterprise Linux Server - AUS 7.4 x86_64',
+                    'Red Hat Enterprise Linux Workstation 7 x86_64',
+                    'Red Hat Enterprise Linux Desktop 7 x86_64',
+                    'Red Hat Enterprise Linux for IBM z Systems 7 s390x'],
         rule_hits: 1
     }
 };
@@ -314,7 +382,7 @@ const PACKAGES_NO_CVES = [{
     moderate_count: 1,
     low_count: 0,
     rhsa_count: 1,
-    cve_count: RHSAS_CVES['RHSA-2017:3071'].cves.length,
+    cve_count: RHSAS['RHSA-2017:3071'].cves.length,
     systems_affected: 2,
     version: '4.0',
     description: `
@@ -327,7 +395,7 @@ const PACKAGES_NO_CVES = [{
         ntpdate is in the ntpdate package and sntp is in the sntp package.
         The documentation is in the ntp-doc package.`,
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
-    rhsas: [RHSAS_CVES['RHSA-2017:3071']]
+    rhsas: [RHSAS['RHSA-2017:3071']]
 }, {
     id: 1,
     name: 'kernel',
@@ -338,10 +406,10 @@ const PACKAGES_NO_CVES = [{
     moderate_count: 0,
     low_count: 0,
     rhsa_count: 4,
-    cve_count: RHSAS_CVES['RHSA-2017:2930'].cves.length +
-                RHSAS_CVES['RHSA-2017:1484'].cves.length +
-                RHSAS_CVES['RHSA-2017:2679'].cves.length +
-                RHSAS_CVES['RHSA-2018:0007'].cves.length,
+    cve_count: RHSAS['RHSA-2017:2930'].cves.length +
+                RHSAS['RHSA-2017:1484'].cves.length +
+                RHSAS['RHSA-2017:2679'].cves.length +
+                RHSAS['RHSA-2018:0007'].cves.length,
     version: '3.10.0-693',
     description: `
         The kernel is the essential center of a computer system the core
@@ -350,42 +418,139 @@ const PACKAGES_NO_CVES = [{
         shell, the outermost part of an operating system that interacts
         with user commands.`,
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
-    rhsas: [RHSAS_CVES['RHSA-2017:2930'], RHSAS_CVES['RHSA-2017:1484'],
-            RHSAS_CVES['RHSA-2017:2679'], RHSAS_CVES['RHSA-2018:0007']]
+    rhsas: [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:1484'],
+            RHSAS['RHSA-2017:2679'], RHSAS['RHSA-2018:0007']]
 }];
 
 constantsModule.constant('VMAAS_PACKAGES_NOCVE', PACKAGES_NO_CVES);
-constantsModule.constant('VMAAS_RHSAS_OBJECT', RHSAS_CVES);
 
-constantsModule.constant('VMAAS_CVES', (function () {
+/**
+ * app/js/api/vulnerability.js:getAllPackages
+ *
+ *     data_needed = {
+ *         id: String/Number,
+ *         systems_affected: Number,
+ *         package_count: Number,
+ *         rhsa_count: Number,
+ *         public_date: Date
+ *     }
+ */
+constantsModule.constant('VMAAS_GET_ALL_CVES', (function () {
     const array = [];
     Object.keys(CVES).forEach(function (key) {
-        array.push(CVES[key]);
+        const cve = CVES[key];
+        array.push({
+            id: cve.id,
+            systems_affected: cve.systems_affected,
+            package_count: cve.package_count,
+            rhsa_count: cve.rhsa_count,
+            public_date: cve.public_date
+        });
     });
 
     return array;
 })());
 
-constantsModule.constant('VMAAS_RHSAS', (function () {
+/**
+ * app/js/api/vulnerability.js:getAllPackages
+ *
+ *     data_needed = {
+ *         id: String/Number,
+ *         name: String,
+ *         systems_affected: Number,
+ *         rhsa_count: Number,
+ *         cve_count: Number,
+ *         release_date: Date
+ *     }
+ */
+constantsModule.constant('VMAAS_GET_ALL_PACKAGES', (function () {
     const array = [];
-    Object.keys(RHSAS_CVES).forEach(function (key) {
-        array.push(RHSAS_CVES[key]);
+    PACKAGES_NO_CVES.forEach(function (obj) {
+        array.push({
+            id: obj.id,
+            name: obj.name,
+            systems_affected: obj.systems_affected,
+            rhsa_count: obj.rhsa_count,
+            cve_count: obj.cve_count,
+            release_date: obj.release_date
+        });
     });
 
     return array;
 })());
 
-constantsModule.constant('VMAAS_PACKAGES', [{
-    id: 0,
-    name: 'ntp',
-    release_date: '2017-01-01',
-    critical_count: 0,
-    important_count: 0,
-    moderate_count: 2,
-    low_count: 0,
-    version: '4.0',
-    rhsas: [RHSAS_CVES['RHSA-2017:3071']]
-}]);
+/**
+ * app/js/api/vulnerability.js:getRHSA
+ *
+ *     data_needed = {
+ *         id: String,
+ *         severity: String,
+ *         systems: Array[Object],
+ *         packages: Array[Object],
+ *         affected_products: Array[String],
+ *         solution: String,
+ *         topic: String,
+ *         type: String,
+ *         description: String,
+ *         cve_count: Number,
+ *         issued: Date
+ *     }
+ */
+constantsModule.constant('VMAAS_GET_RHSA', (function () {
+    const obj = {};
+    Object.keys(RHSAS).forEach(function (key) {
+        const rhsa = RHSAS[key];
+        obj[key] = {};
+
+        if (key === 'RHSA-2017:3071') {
+            obj[key].packages = [PACKAGES_NO_CVES[0]];
+        } else {
+            obj[key].packages = [PACKAGES_NO_CVES[1]];
+        }
+
+        obj[key].id = rhsa.id;
+        obj[key].severity = rhsa.severity;
+        obj[key].systems = rhsa.systems;
+        obj[key].description = rhsa.description;
+        obj[key].affected_products = rhsa.affected_products;
+        obj[key].solution = rhsa.solution;
+        obj[key].type = rhsa.type;
+        obj[key].cve_count = rhsa.cve_count;
+        obj[key].issued = rhsa.issued;
+        obj[key].topic = rhsa.summary;
+    });
+
+    return obj;
+})());
+
+/**
+ * app/js/api/vulnerability.js:getAllRHSAs
+ *
+ *     data_needed = {
+ *         id: String,
+ *         severity: String,
+ *         systems_affected: Number,
+ *         package_count: Number,
+ *         cve_count: Number,
+ *         issued: Date
+ *     }
+ */
+constantsModule.constant('VMAAS_GET_ALL_RHSAS', (function () {
+    const array = [];
+    Object.keys(RHSAS).forEach(function (key) {
+        const rhsa = RHSAS[key];
+        array.push({
+            id: rhsa.id,
+            severity: rhsa.severity,
+            systems_affected: rhsa.systems_affected,
+            package_count: rhsa.package_count,
+            cve_count: rhsa.cve_count,
+            issued: rhsa.issued
+        });
+    });
+
+    return array;
+})());
 
 constantsModule.constant('VMAAS_SYSTEMS', [{
     system_id: 'f7473238-1953-415f-8de6-a8da92975a64',
