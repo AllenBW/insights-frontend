@@ -1,11 +1,15 @@
-.page-vulnerabilities-package(ng-if='!loading')
-  section.header
+.page-vulnerabilities-rhsa(ng-if='!loading')
+  section.vulnerability-details-header
     page-header(title="{{:: rhsa.id}}", subtitle="pageHeaderSubtitle")
-    .description
-      span {{:: rhsa.description}}
+    .page-header-aside.icon-inline.severity(ng-class="{{'rhsa.severity'}}")
+      i.fa.fa-shield
+      span {{rhsa.severity}}
+    .description test test
+    .description-aside
+      .header-sm Affected Products
+      span test
 
-  .content-wrap
-    .table-header
-      table-filters
-        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
-        rhsa-severity-select
+  table-filters
+    search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+
+  section.content-wrap
