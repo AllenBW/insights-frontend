@@ -425,7 +425,7 @@ const PACKAGES_NO_CVES = [{
 constantsModule.constant('VMAAS_PACKAGES_NOCVE', PACKAGES_NO_CVES);
 
 /**
- * app/js/api/vulnerability.js:getAllPackages
+ * app/js/api/vulnerability.js:getCVEs
  *
  *     data_needed = {
  *         id: String/Number,
@@ -452,7 +452,7 @@ constantsModule.constant('VMAAS_GET_ALL_CVES', (function () {
 })());
 
 /**
- * app/js/api/vulnerability.js:getAllPackages
+ * app/js/api/vulnerability.js:getPackages
  *
  *     data_needed = {
  *         id: String/Number,
@@ -524,7 +524,7 @@ constantsModule.constant('VMAAS_GET_RHSA', (function () {
 })());
 
 /**
- * app/js/api/vulnerability.js:getAllRHSAs
+ * app/js/api/vulnerability.js:getRHSAs
  *
  *     data_needed = {
  *         id: String,

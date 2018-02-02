@@ -3,11 +3,14 @@
     page-header(title="{{:: rhsa.id}}", subtitle="pageHeaderSubtitle")
     .page-header-aside.icon-inline.severity(ng-class="{{'rhsa.severity'}}")
       i.fa.fa-shield
-      span {{rhsa.severity}}
-    .description test test
+      span {{:: rhsa.severity}}
+    .description
+      .header-sm Description
+      span {{:: rhsa.description}}
     .description-aside
       .header-sm Affected Products
-      span test
+      ul.affected-product-list
+        li.affected-product(ng-repeat="product in rhsa.affected_products") {{:: product}}
 
   table-filters
     search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
