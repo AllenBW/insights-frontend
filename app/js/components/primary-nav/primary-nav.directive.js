@@ -7,11 +7,12 @@ var componentsModule = require('../');
 * @ngInject
 */
 
-function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User) {
+function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt) {
 
-  const policyAccounts = {
+    const policyAccounts = {
         540155: true,
-        540694: true
+        540694: true,
+        901578: true
     };
 
     $scope.canSeePolicies = false;
