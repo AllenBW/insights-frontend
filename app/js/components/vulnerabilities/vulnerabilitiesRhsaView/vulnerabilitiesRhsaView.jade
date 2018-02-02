@@ -12,7 +12,42 @@
       ul.affected-product-list
         li.affected-product(ng-repeat="product in rhsa.affected_products") {{:: product}}
 
-  table-filters
-    search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+  .vulnerability-tables
+    .primary
+      table-filters
+        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+      table(ng-if='getListType() === listTypes.table')
+        thead
+          tr
+            th.min
+              md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+                tooltip='Select All',
+                type="checkbox",
+                aria-label='Select All Systems Checkbox',
+                md-indeterminate="checkboxes.indeterminate",
+                ng-model='checkboxes.checked')
+            th.min.sortable Type
+            th.sortable Name
+            th.min.sortable Release Date
+
+        tbody
+          tr
+            td.min
+              md-checkbox.md-accent.md-hue-1.md-checkbox-list(
+                type='checkbox',
+                aria-label='Select System Checkbox')
+            td.fit-content Type
+            td.break
+              a System
+            td.fit-content 0000-00-00
+    .secondary
+      table
+          thead
+            tr
+              th.fit-content.nowrap.sortable Related Packages
+          tbody
+            tr
+              td.fit-content.nowrap
+                span test
 
   section.content-wrap
