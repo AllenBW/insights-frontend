@@ -44,6 +44,11 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
         policies: [
             'app.view-policy',
             'app.list-policies'
+        ],
+        vulnerabilities: [
+            'app.vulnerabilities',
+            'app.vulnerabilities-rhsa',
+            'app.vulnerabilities-package'
         ]
     };
 
