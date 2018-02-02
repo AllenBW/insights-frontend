@@ -11,8 +11,8 @@ function vulnerabilitiesRhsaViewCtrl($scope, $stateParams, Vulnerability) {
 
     function initPageHeader () {
         const release_date = `Release Date: ${$scope.rhsa.issued}`;
-        const package_count = $scope.rhsa.package_count === 1 ? '1 Package' :
-                              `${$scope.rhsa.package_count} Packages`;
+        const package_count = $scope.rhsa.packages.length === 1 ? '1 Package' :
+                              `${$scope.rhsa.packages.length} Packages`;
         const cve_count = $scope.rhsa.cve_count === 1 ? '1 CVE' :
                               `${$scope.rhsa.cve_count} CVEs`;
 

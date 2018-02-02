@@ -41,13 +41,13 @@ function VulnerabilitiesCtrl($filter,
         params.search_term = $scope.searchText;
 
         if ($scope.selectedView === $scope.views.package) {
-            Vulnerability.getAll(params).then((vulnerabilities) => {
+            Vulnerability.getPackages(params).then((vulnerabilities) => {
                 $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
                 order();
                 $scope.loading = false;
             });
         } else if ($scope.selectedView === $scope.views.rhsa) {
-            Vulnerability.getAllRHSAs(params).then((vulnerabilities) => {
+            Vulnerability.getRHSAs(params).then((vulnerabilities) => {
                 $scope.allVulnerabilities = _allVulnerabilities = vulnerabilities;
                 order();
                 $scope.loading = false;
