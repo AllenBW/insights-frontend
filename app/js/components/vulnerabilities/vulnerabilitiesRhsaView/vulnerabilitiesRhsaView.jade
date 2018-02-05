@@ -5,21 +5,19 @@
       i.fa.fa-shield
       span {{:: rhsa.severity}}
     .description
-      .header-sm Topic
+      h2.section-title.section-title-red Topic
       span {{:: rhsa.topic}}
-      .header-sm Description
+      h2.section-title.section-title-red Description
       span {{:: rhsa.description}}
+      .solution
+        h2.section-title.section-title-red Solution
+        span {{:: rhsa.solution}}
     .description-aside
-      .header-sm Affected Products
+      h2.section-title.section-title-red Affected Products
       ul.affected-product-list
         li.affected-product(ng-repeat="product in rhsa.affected_products") {{:: product}}
 
-  .content-wrap
-    .solution
-      .header-sm Solution
-      span {{:: rhsa.solution}}
-
-  .vulnerability-tables
+  section.vulnerability-tables
     .primary
       .table-header
         .dropdown
@@ -54,7 +52,7 @@
                 ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, rhsa.systems)')
             th.min.sortable(translate) Type
             th.sortable(translate) Name
-            th.min.sortable(translate) Last Check In
+            th.min.fit-content.sortable(translate) Last Check In
 
         tbody
           tr(ng-click='checkboxes.rowClick($event, system.system_id)',
@@ -74,14 +72,13 @@
             td.break
               a(ng-click='showSystem(system)') {{:: system.toString }}
             td.fit-content {{:: system.last_check_in | timeAgo}}
-    .secondary
-      table
-          thead
-            tr
-              th.fit-content.nowrap.sortable Related Packages
-          tbody
-            tr(ng-repeat='package in rhsa.packages')
-              td.fit-content.nowrap
-                span {{:: package.name}}
+    table.related-packages
+        thead
+          tr
+            th.fit-content.nowrap.sortable Related Packages
+        tbody
+          tr(ng-repeat='package in rhsa.packages')
+            td.fit-content.nowrap
+              span {{:: package.name}}
 
   section.content-wrap
