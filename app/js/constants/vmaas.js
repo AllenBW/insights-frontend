@@ -511,6 +511,7 @@ constantsModule.constant('VMAAS_GET_RHSA', (function () {
         obj[key].id = rhsa.id;
         obj[key].severity = rhsa.severity;
         obj[key].systems = rhsa.systems;
+        obj[key].systems_affected = rhsa.systems_affected;
         obj[key].description = rhsa.description;
         obj[key].affected_products = rhsa.affected_products;
         obj[key].solution = rhsa.solution;
