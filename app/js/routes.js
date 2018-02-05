@@ -168,6 +168,14 @@ function Routes($stateProvider) {
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
             title: 'Vulnerabilities'
+        })
+
+        .state('app.vulnerabilities-cve', {
+            url: '/vulnerabilities/cve/:cve_id',
+            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesCveView' +
+            '/vulnerabilitiesCveView.html',
+            controller: 'vulnerabilitiesCveViewCtrl',
+            title: 'Vulnerabilities'
         });
 
     // Common announcements routes

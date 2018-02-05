@@ -1,23 +1,16 @@
-.page-vulnerabilities-rhsa(ng-if='!loading')
+.page-vulnerabilities-cve(ng-if='!loading')
   section.vulnerability-details-header
-    page-header(title="{{:: rhsa.id}}", subtitle="pageHeaderSubtitle")
-    .page-header-aside.icon-inline.severity(ng-class="{{'rhsa.severity'}}")
+    page-header(title="{{:: cve.id}}", subtitle="pageHeaderSubtitle")
+    .page-header-aside.icon-inline.severity(ng-class="{{'cve.impact'}}")
       i.fa.fa-shield
-      span {{:: rhsa.severity}}
+      span {{:: cve.impact}}
     .description
-      .header-sm Topic
-      span {{:: rhsa.topic}}
       .header-sm Description
-      span {{:: rhsa.description}}
-    .description-aside
+      span {{:: cve.description}}
+    //- .description-aside
       .header-sm Affected Products
       ul.affected-product-list
         li.affected-product(ng-repeat="product in rhsa.affected_products") {{:: product}}
-
-  .content-wrap
-    .solution
-      .header-sm Solution
-      span {{:: rhsa.solution}}
 
   .vulnerability-tables
     .primary
