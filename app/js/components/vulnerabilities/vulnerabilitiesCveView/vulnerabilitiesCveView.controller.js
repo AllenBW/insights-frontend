@@ -5,34 +5,34 @@ const componentsModule = require('../../');
 /**
  * @ngInject
  */
-function vulnerabilitiesRhsaViewCtrl($scope,
+function vulnerabilitiesCveViewCtrl($scope,
                                      $stateParams,
                                      InsightsConfig,
                                      Utils,
                                      Vulnerability) {
 
-    $scope.rhsa_id = $stateParams.rhsa_id;
+    $scope.cve_id = $stateParams.cve_id;
     $scope.checkboxes = new Utils.Checkboxes('system_id');
     $scope.config = InsightsConfig;
 
     function initPageHeader () {
-        const release_date = `Release Date: ${$scope.rhsa.issued}`;
-        const package_count = $scope.rhsa.packages.length === 1 ? '1 Package' :
-                              `${$scope.rhsa.packages.length} Packages`;
-        const cve_count = $scope.rhsa.cve_count === 1 ? '1 CVE' :
-                              `${$scope.rhsa.cve_count} CVEs`;
+        const public_date = `Public Date: ${$scope.cve.public_date}`;
+        const package_count = $scope.cve.packages.length === 1 ? '1 Package' :
+                              `${$scope.cve.packages.length} Packages`;
+        const rhsa_count = $scope.cve.rhsa_count === 1 ? '1 RHSA' :
+                              `${$scope.cve.rhsa_count} RHSAs`;
 
         $scope.pageHeaderSubtitle = [
-                release_date,
+                public_date,
                 package_count,
-                cve_count];
+                rhsa_count];
     }
 
     function getData () {
-        Vulnerability.getRHSA($scope.rhsa_id).then((rhsa) => {
-            $scope.rhsa = rhsa;
+        Vulnerability.getCVE($scope.cve_id).then((cve) => {
+            $scope.cve = cve;
             initPageHeader();
-            $scope.totalSystems = rhsa.systems_affected;
+            $scope.totalSystems = cve.systems_affected;
         });
     }
 
@@ -55,5 +55,5 @@ function vulnerabilitiesRhsaViewCtrl($scope,
     }
 }
 
-componentsModule.controller('vulnerabilitiesRhsaViewCtrl',
-  vulnerabilitiesRhsaViewCtrl);
+componentsModule.controller('vulnerabilitiesCveViewCtrl',
+  vulnerabilitiesCveViewCtrl);
