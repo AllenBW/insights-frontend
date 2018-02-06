@@ -11,14 +11,17 @@
       search-box(ng-show="selectedView === views.cve", placeholder="{{'Search CVEs' | translate}}",
                  on-search='search(model)')
 
-    .view-switcher
+    .view-switcher.button-tabs
       b View by:
-      a.active(ng-click="changeView(views.package)",
-        ng-class="{active: selectedView === views.package}") {{:: views.package }}
-      a(ng-click="changeView(views.rhsa)",
-        ng-class="{active: selectedView === views.rhsa}") {{:: views.rhsa }}
-      a(ng-click="changeView(views.cve)",
-        ng-class="{active: selectedView === views.cve}") {{:: views.cve }}
+      md-button(ng-click="changeView(views.package)",
+        ng-class="{active: selectedView === views.package}")
+        a {{:: views.package }}
+      md-button(ng-click="changeView(views.rhsa)",
+        ng-class="{active: selectedView === views.rhsa}")
+        a {{:: views.rhsa }}
+      md-button(ng-click="changeView(views.cve)",
+        ng-class="{active: selectedView === views.cve}")
+        a {{:: views.cve }}
 
   // TODO make embedded card a component
   .content-wrap

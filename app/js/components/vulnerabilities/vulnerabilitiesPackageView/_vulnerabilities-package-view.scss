@@ -23,7 +23,7 @@ $card-list-tiles-gutter: $global-margin;
 
     @include media-query(sm) { flex: 0 1 calc(50% - #{$card-list-tiles-gutter); } }
     @include media-query(md) { flex: 0 1 calc(25% - #{$card-list-tiles-gutter); } }
-  }  
+  }
 }
 
 //==================================================================*/
@@ -51,7 +51,7 @@ $card-footer: "md-card-footer";
 
 .card.card-rhsa.active {
 
-  &:after { 
+  &:after {
     color: #c4c4c4;
     font-family: FontAwesome;
     content: "\f0d8";
@@ -77,15 +77,18 @@ $card-footer: "md-card-footer";
   > .card-cve-summary { flex: 0 1 calc(100% - #{$card-list-tiles-gutter); } }
 
 
-  .icon { 
-    @include rem('margin-bottom', 15px); 
+  .icon {
+    @include rem('margin-bottom', 15px);
     @include rem('font-size', 25px);
   }
 
-  h2.text { @include rem('font-size', 18px); }
+  a .text {
+    @include rem('margin-bottom', 15px);
+    @include rem('font-size', 18px);
+  }
 
-  .subhead { 
-    display: flex; 
+  .subhead {
+    display: flex;
     justify-content: space-between;
   }
 
@@ -106,8 +109,7 @@ $card-footer: "md-card-footer";
                       'cve-information';
 
 
-  
-  @include media-query(sm) {  
+  @include media-query(sm) {
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-row: auto;
     grid-template-areas: 'cve-id rule-hit rule-hit'
@@ -120,7 +122,7 @@ $card-footer: "md-card-footer";
 
   .cve-id { grid-area: cve-id; }
 
-  .description { 
+  .description {
     grid-area: description;
     grid-row: auto;
   }
@@ -144,21 +146,21 @@ $card-footer: "md-card-footer";
 
   .card-vulnerabilities { @include rem('margin', 15px); }
 
-  .cve-count { 
-    display: flex;
-    justify-content: space-around;
+  .cve-count {
+    display: grid;
+    grid-template-columns: 2fr 1% 2fr;
   }
 
   .description .cve-link, .description i { @include rem('padding-left', 5px); }
 
-     
-  // Styling CVE IDs 
+
+  // Styling CVE IDs
   //==================================================================*/
   .cve-id li i { @include rem('padding-left', 5px); }
 
-  .cve-id li a.active { 
+  .cve-id li a.active {
     text-decoration: underline;
-    font-weight: 600; 
+    font-weight: 600;
   }
 
 
@@ -176,7 +178,7 @@ $card-footer: "md-card-footer";
     border-left: 5px solid $blue-light;
 
     md-card-header {
-      align-items: center; 
+      align-items: center;
       color: $blue-light;
       display: flex;
       @include rem('padding', 5px);

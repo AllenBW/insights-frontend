@@ -1,7 +1,7 @@
 .page-vulnerabilities-rhsa(ng-if='!loading')
   section.vulnerability-details-header
     page-header(title="{{:: rhsa.id}}", subtitle="pageHeaderSubtitle")
-    .page-header-aside.icon-inline.severity(ng-class="{{'rhsa.severity'}}")
+    aside.page-header-aside.icon-inline.severity(ng-class="{{'rhsa.severity'}}")
       i.fa.fa-shield
       span {{:: rhsa.severity}}
     .description
@@ -12,7 +12,7 @@
       .solution
         h2.section-title.section-title-red Solution
         span {{:: rhsa.solution}}
-    .description-aside
+    aside.description-aside
       h2.section-title.section-title-red Affected Products
       ul.affected-product-list
         li.affected-product(ng-repeat="product in rhsa.affected_products") {{:: product}}
@@ -74,14 +74,12 @@
             td.break
               a(ng-click='showSystem(system, true, tabs.vulnerabilities)') {{:: system.toString }}
             td.fit-content {{:: system.last_check_in | timeAgo}}
-    .secondary
-      table
-          thead
-            tr
-              th.fit-content.nowrap.sortable Related Packages
-          tbody
-            tr(ng-repeat='package in rhsa.packages')
-              td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}
 
-  section.content-wrap
+    table.related-packages
+        thead
+          tr
+            th.fit-content.nowrap.sortable Related Packages
+        tbody
+          tr(ng-repeat='package in rhsa.packages')
+            td.fit-content.nowrap
+              a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}

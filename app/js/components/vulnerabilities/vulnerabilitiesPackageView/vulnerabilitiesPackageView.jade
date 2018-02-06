@@ -16,7 +16,8 @@
           .icon
             i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
           strong
-            a.text(ui-sref='app.vulnerabilities-rhsa({rhsa_id: rhsa.id})', ng-click="$event.stopPropagation()") {{ rhsa.id }}
+            a(ui-sref='app.vulnerabilities-rhsa({rhsa_id: rhsa.id})', ng-click="$event.stopPropagation()")
+              .text {{ rhsa.id }}
           .cve-count
             span {{ rhsa.cves.length }} CVEs
             .pipe |

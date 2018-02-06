@@ -5,12 +5,8 @@
       i.fa.fa-shield
       span {{:: cve.impact}}
     .description
-      .header-sm Description
+      h2.section-title.section-title-red Description
       span {{:: cve.description}}
-    //- .description-aside
-      .header-sm Affected Products
-      ul.affected-product-list
-        li.affected-product(ng-repeat="product in rhsa.affected_products") {{:: product}}
 
   .vulnerability-tables
     .primary
@@ -67,14 +63,13 @@
             td.break
               a(ng-click='showSystem(system)') {{:: system.toString }}
             td.fit-content {{:: system.last_check_in | timeAgo}}
-    .secondary
-      table
-          thead
-            tr
-              th.fit-content.nowrap.sortable Related Packages
-          tbody
-            tr(ng-repeat='package in cve.packages')
-              td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}
+    table.related-packages
+        thead
+          tr
+            th.fit-content.nowrap.sortable Related Packages
+        tbody
+          tr(ng-repeat='package in cve.packages')
+            td.fit-content.nowrap
+              a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}
 
   section.content-wrap
