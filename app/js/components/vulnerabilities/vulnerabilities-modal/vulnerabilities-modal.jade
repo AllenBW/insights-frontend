@@ -9,7 +9,7 @@
         .package-info
           h3.title {{:: rhsa.id}}
           date.date Release Date: {{:: rhsa.issued}}
-          span.version Updated Date: {{:: rhsa.updated_date}}
+          span.version Last updated: {{:: rhsa.updated}}
 
       card-content(collapse="card.collapsed")
         h2.section-title.section-title-red Description
@@ -22,11 +22,11 @@
               th Fixed Version
               th Latest Version
           tbody
-            tr
-              td package
-              td {{:: rhsa.current_version}}
-              td {{:: rhsa.fixed_version}}
-              td {{:: rhsa.latest_version}}
+            tr(ng-repeat="package in rhsa.packages")
+              td {{:: package.name}}
+              td {{:: package.system_version}}
+              td {{:: package.fixed_version}}
+              td {{:: package.latest_version}}
         table
           thead
             tr
@@ -36,9 +36,10 @@
               th Impact
               th View In Portal
           tbody
-            tr
+            tr(ng-repeat="cve in rhsa.cves")
               td {{:: cve.id}}
               td {{:: cve.score}}
               td {{:: cve.public_date}}
               td {{:: cve.impact}}
-              td {{:: cve.link}}
+              td
+                a(href="{{cve.link}}", target="_blank") {{:: cve.link}}

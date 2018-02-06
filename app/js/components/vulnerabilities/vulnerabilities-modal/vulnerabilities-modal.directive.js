@@ -39,6 +39,7 @@ function vulnerabilitiesModalCtrl($scope,
     function getData() {
         System.getVulnerabilities($scope.systemId)
             .then((system) => {
+                console.log(system);
                 $scope.system = system;
             });
     }
