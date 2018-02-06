@@ -19,7 +19,8 @@ function System(
     PreferenceService,
     Products,
     Utils,
-    VMAAS_SYSTEMS) {
+    VMAAS_SYSTEMS,
+    VMAAS_GET_SYSTEM) {
 
     var root = InsightsConfig.apiRoot;
     var _systemDfd;
@@ -362,7 +363,7 @@ function System(
         },
 
         getVulnerabilities (systemId) {
-            return $q.resolve(find(VMAAS_SYSTEMS, {system_id: systemId}));
+            return $q.resolve(find(VMAAS_GET_SYSTEM, {system_id: systemId}));
         },
 
         getAllVulnerabilities () {

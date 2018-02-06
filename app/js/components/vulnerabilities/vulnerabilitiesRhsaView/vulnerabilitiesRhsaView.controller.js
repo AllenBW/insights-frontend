@@ -9,11 +9,15 @@ function vulnerabilitiesRhsaViewCtrl($scope,
                                      $stateParams,
                                      InsightsConfig,
                                      Utils,
-                                     Vulnerability) {
+                                     InventoryService,
+                                     Vulnerability,
+                                     SystemModalTabs) {
 
     $scope.rhsa_id = $stateParams.rhsa_id;
     $scope.checkboxes = new Utils.Checkboxes('system_id');
     $scope.config = InsightsConfig;
+    $scope.showSystem = InventoryService.showSystemModal;
+    $scope.tabs = SystemModalTabs;
 
     function initPageHeader () {
         const release_date = `Release Date: ${$scope.rhsa.issued}`;
@@ -53,6 +57,11 @@ function vulnerabilitiesRhsaViewCtrl($scope,
             $scope.reallyAllSelected = false;
         }
     }
+
+    $scope.search = function (model) {
+        //TODO: table search
+        console.log(model);
+    };
 }
 
 componentsModule.controller('vulnerabilitiesRhsaViewCtrl',

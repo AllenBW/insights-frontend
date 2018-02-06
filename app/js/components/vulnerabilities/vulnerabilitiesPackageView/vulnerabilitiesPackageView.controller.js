@@ -92,14 +92,14 @@ function vulnerabilitiesPackageViewCtrl($scope,
         }
     };
 
-    $scope.goToRule = function () {
-        const params = $location.search();
-        params.selectedRule = $scope.selectedRule.rule_id;
-        params.activeTab = SystemModalTabs.rules;
-        params.selectedPackage = $scope.selectedRHSA.package.id;
-        params.selectedRHSA = $scope.selectedRHSA.id;
-        $location.search(params);
-    };
+    // $scope.goToRule = function () {
+    //     const params = $location.search();
+    //     params.selectedRule = $scope.selectedRule.rule_id;
+    //     params.activeTab = SystemModalTabs.rules;
+    //     params.selectedPackage = $scope.selectedRHSA.package.id;
+    //     params.selectedRHSA = $scope.selectedRHSA.id;
+    //     $location.search(params);
+    // };
 
     function fetchRule (rule_id) {
         $scope.loadingRule = true;

@@ -74,7 +74,6 @@
                 ng-click="sort('toString')", translate) CVE Name
               th.text-center.fit-content.min.nowrap.sortable(translate) Systems
               th.text-center.fit-content.min.nowrap.sortable(translate) Packages
-              th.text-center.fit-content.min.nowrap.sortable(translate) RHSAs
               th.text-center.fit-content.min.nowrap.sortable(translate) Release Date
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
@@ -84,7 +83,5 @@
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.package_count}}
-              td.text-center.fit-content.nowrap
-                span {{:: vulnerability.rhsa_count}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.public_date}}
