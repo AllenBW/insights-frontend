@@ -28,8 +28,8 @@ const CVES = {
         iava: '2017-A-0084',
         cwe: 'CWE-20',
         systems_affected: 2,
-        rhsa_count: 1,
         package_count: 1,
+        score: 6.4,
         description: 'A vulnerability was found in NTP, in the parsing of ' +
              'packets from the /dev/datum device. A malicious device could send ' +
              'crafted messages, causing ntpd to crash. Find out more about ' +
@@ -44,8 +44,8 @@ const CVES = {
         iava: '2017-A-0084',
         cwe: 'CWE-20',
         systems_affected: 2,
-        rhsa_count: 1,
         package_count: 1,
+        score: 6.5,
         description: 'A vulnerability was discovered in the NTP server\'s ' +
              'parsing of configuration directives. A remote, authenticated ' +
              'attacker could cause ntpd to crash by sending a crafted message.' +
@@ -61,8 +61,8 @@ const CVES = {
         iava: null,
         cew: null,
         systems_affected: 2,
-        rhsa_count: 1,
         package_count: 1,
+        score: 5.5,
         description: `
             An industry-wide issue was found in the way many modern microprocessor designs
             have implemented speculative execution of instructions (a commonly used
@@ -90,8 +90,8 @@ const CVES = {
         iava: null,
         cwe: 'CWE-121',
         systems_affected: 2,
-        rhsa_count: 1,
         package_count: 1,
+        score: 6.8,
         description: `
         A stack buffer overflow flaw was found in the way the Bluetooth subsystem
         of the Linux kernel processed pending L2CAP configuration responses from
@@ -117,8 +117,8 @@ const CVES = {
         iava: null,
         cwe: null,
         systems_affected: 2,
-        rhsa_count: 1,
         package_count: 1,
+        score: 6.2,
         description: `
         A flaw was found in the way memory was being allocated on the stack for
         user space binaries. If heap (or different memory region) and stack memory
@@ -140,8 +140,8 @@ const CVES = {
         iava: null,
         cwe: 'CWE-122',
         systems_affected: 2,
-        rhsa_count: 1,
         package_count: 1,
+        score: 7.8,
         description: `
         Out-of-bounds kernel heap access vulnerability was found in xfrm,
         kernel's IP framework for transforming packets. An error dealing with
@@ -425,13 +425,48 @@ const PACKAGES_NO_CVES = [{
 constantsModule.constant('VMAAS_PACKAGES_NOCVE', PACKAGES_NO_CVES);
 
 /**
+ * app/js/api/vulnerability.js:getCVE
+ *
+ *     data_needed = {
+ *         id: String/Number,
+ *         systems_affected: Number,
+ *         package_count: Number,
+ *         public_date: Date,
+ *         impact: String,
+ *         systems: Array[Object],
+ *         packages: Array[Object],
+ *         description: String
+ *     }
+ */
+constantsModule.constant('VMAAS_GET_CVE', (function () {
+    const obj = {};
+    Object.keys(CVES).forEach(function (key) {
+        const cve = CVES[key];
+        const packages = key === 'CVE-2017-6462' ||
+                         key === 'CVE-2017-6463' ?
+                         [PACKAGES_NO_CVES[0]] :
+                         [PACKAGES_NO_CVES[1]];
+        obj[key] = {};
+        obj[key].id = cve.id;
+        obj[key].systems_affected = cve.systems_affected;
+        obj[key].systems = cve.systems;
+        obj[key].package_count = cve.package_count;
+        obj[key].public_date = cve.public_date;
+        obj[key].packages = packages;
+        obj[key].impact = cve.impact;
+        obj[key].description = cve.description;
+    });
+
+    return obj;
+})());
+
+/**
  * app/js/api/vulnerability.js:getCVEs
  *
  *     data_needed = {
  *         id: String/Number,
  *         systems_affected: Number,
  *         package_count: Number,
- *         rhsa_count: Number,
  *         public_date: Date
  *     }
  */
@@ -443,7 +478,6 @@ constantsModule.constant('VMAAS_GET_ALL_CVES', (function () {
             id: cve.id,
             systems_affected: cve.systems_affected,
             package_count: cve.package_count,
-            rhsa_count: cve.rhsa_count,
             public_date: cve.public_date
         });
     });
@@ -458,8 +492,8 @@ constantsModule.constant('VMAAS_GET_ALL_CVES', (function () {
  *         id: String/Number,
  *         name: String,
  *         systems_affected: Number,
- *         rhsa_count: Number,
  *         cve_count: Number,
+ *         rhsa_count: Number,
  *         release_date: Date
  *     }
  */
@@ -533,7 +567,8 @@ constantsModule.constant('VMAAS_GET_RHSA', (function () {
  *         systems_affected: Number,
  *         package_count: Number,
  *         cve_count: Number,
- *         issued: Date
+ *         issued: Date,
+ *         updated_date: Date
  *     }
  */
 constantsModule.constant('VMAAS_GET_ALL_RHSAS', (function () {
@@ -546,11 +581,36 @@ constantsModule.constant('VMAAS_GET_ALL_RHSAS', (function () {
             systems_affected: rhsa.systems_affected,
             package_count: rhsa.package_count,
             cve_count: rhsa.cve_count,
-            issued: rhsa.issued
+            issued: rhsa.issued,
+            updated_date: new Date(Date.now()).toLocaleString()
         });
     });
 
     return array;
+})());
+
+/**
+ * app/js/api/system.js:getVulnerabilities
+ */
+constantsModule.constant('VMAAS_GET_SYSTEM', (function () {
+    const obj = {};
+    Object.keys(SYSTEMS).forEach(function (key) {
+        const sys = SYSTEMS[key];
+
+        obj[key] = {};
+        obj[key].system_id = sys.system_id;
+        obj[key].system_type = sys.system_type;
+        obj[key].toString = sys.toString;
+        obj[key].account_number = sys.account_number;
+        obj[key].report_count = sys.report_count;
+        obj[key].last_check_in = sys.last_check_in;
+        obj[key].packages = PACKAGES_NO_CVES;
+        obj[key].rhsas = [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:3071'],
+                          RHSAS['RHSA-2017:1484'], RHSAS['RHSA-2017:2679'],
+                          RHSAS['RHSA-2018:0007']];
+    });
+
+    return obj;
 })());
 
 constantsModule.constant('VMAAS_SYSTEMS', [{
@@ -560,5 +620,8 @@ constantsModule.constant('VMAAS_SYSTEMS', [{
     account_number: '540155',
     report_count: 2,
     last_check_in: '2018-01-17T13:16:31.000Z',
-    packages: PACKAGES_NO_CVES
+    packages: PACKAGES_NO_CVES,
+    rhsas: [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:3071'],
+            RHSAS['RHSA-2017:1484'], RHSAS['RHSA-2017:2679'],
+            RHSAS['RHSA-2018:0007']]
 }]);

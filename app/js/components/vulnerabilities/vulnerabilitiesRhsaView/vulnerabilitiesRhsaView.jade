@@ -19,6 +19,8 @@
 
   section.vulnerability-tables
     .primary
+      table-filters
+        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
       .table-header
         .dropdown
           md-button.button-dropdown(
@@ -70,15 +72,16 @@
             td.fit-content
               type-icon(type-id='system.system_type_id', include-text='true')
             td.break
-              a(ng-click='showSystem(system)') {{:: system.toString }}
+              a(ng-click='showSystem(system, true, tabs.vulnerabilities)') {{:: system.toString }}
             td.fit-content {{:: system.last_check_in | timeAgo}}
-    table.related-packages
-        thead
-          tr
-            th.fit-content.nowrap.sortable Related Packages
-        tbody
-          tr(ng-repeat='package in rhsa.packages')
-            td.fit-content.nowrap
-              span {{:: package.name}}
+    .secondary
+      table
+          thead
+            tr
+              th.fit-content.nowrap.sortable Related Packages
+          tbody
+            tr(ng-repeat='package in rhsa.packages')
+              td.fit-content.nowrap
+                a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}
 
   section.content-wrap

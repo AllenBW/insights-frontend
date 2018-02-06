@@ -19,20 +19,25 @@ function vulnerabilitiesCveViewCtrl($scope,
         const public_date = `Public Date: ${$scope.cve.public_date}`;
         const package_count = $scope.cve.packages.length === 1 ? '1 Package' :
                               `${$scope.cve.packages.length} Packages`;
-        const rhsa_count = $scope.cve.rhsa_count === 1 ? '1 RHSA' :
-                              `${$scope.cve.rhsa_count} RHSAs`;
 
-        $scope.pageHeaderSubtitle = [
-                public_date,
-                package_count,
-                rhsa_count];
+        $scope.pageHeaderSubtitle = [];
+        $scope.pageHeaderSubtitle.push(public_date);
+        $scope.pageHeaderSubtitle.push(package_count);
+
+        if ($scope.cve.iava) {
+            $scope.pageHeaderSubtitle.push(`IAVA: ${$scope.cve.iava}`);
+        }
+
+        if ($scope.cve.cwe) {
+            $scope.pageHeaderSubtitle.push(`CWE: ${$scope.cve.cwe}`);
+        }
     }
 
     function getData () {
         Vulnerability.getCVE($scope.cve_id).then((cve) => {
             $scope.cve = cve;
-            initPageHeader();
             $scope.totalSystems = cve.systems_affected;
+            initPageHeader();
         });
     }
 
