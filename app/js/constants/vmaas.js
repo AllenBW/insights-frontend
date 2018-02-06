@@ -161,6 +161,7 @@ const RHSAS = {
         severity: 'moderate',
         systems_affected: 2,
         issued: '2017-10-26',
+        updated: '2017-10-26',
         package_count: 1,
         cve_count: 2,
         summary: 'An update for ntp is now available for Red Hat Enterprise Linux ' +
@@ -203,6 +204,7 @@ const RHSAS = {
         severity: 'important',
         systems_affected: 2,
         issued: '2018-01-03',
+        updated: '2018-01-03',
         package_count: 1,
         cve_count: 1,
         summary:'An update for kernel is now available for Red Hat Enterprise Linux 7.',
@@ -236,6 +238,7 @@ const RHSAS = {
         severity: 'important',
         systems_affected: 2,
         issued: '2017-09-12',
+        updated: '2017-09-12',
         package_count: 1,
         cve_count: 1,
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
@@ -265,6 +268,7 @@ const RHSAS = {
         severity: 'important',
         systems_affected: 2,
         issued: '2017-06-19',
+        updated: '2017-06-19',
         package_count: 1,
         cve_count: 1,
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
@@ -301,6 +305,7 @@ const RHSAS = {
         severity: 'important',
         systems_affected: 2,
         issued: '2017-10-19',
+        updated: '2017-10-19',
         package_count: 1,
         cve_count: 1,
         summary: 'An update for kernel is now available for Red Hat Enterprise Linux 7.',
@@ -582,7 +587,7 @@ constantsModule.constant('VMAAS_GET_ALL_RHSAS', (function () {
             package_count: rhsa.package_count,
             cve_count: rhsa.cve_count,
             issued: rhsa.issued,
-            updated_date: new Date(Date.now()).toLocaleString()
+            updated: rhsa.updated
         });
     });
 
@@ -597,6 +602,34 @@ constantsModule.constant('VMAAS_GET_SYSTEM', (function () {
     Object.keys(SYSTEMS).forEach(function (key) {
         const sys = SYSTEMS[key];
 
+        if (key === 'kinlaw-rhel-vm') {
+            PACKAGES_NO_CVES[0].latest_version = '4.0';
+            PACKAGES_NO_CVES[0].system_version = '3.0';
+            PACKAGES_NO_CVES[0].fixed_version = '3.0';
+            PACKAGES_NO_CVES[1].latest_version = '3.10.0-693';
+            PACKAGES_NO_CVES[1].system_version = '3.10.0-693';
+            PACKAGES_NO_CVES[1].fixed_version = '3.10.0-693';
+        }
+
+        if (key === 'kinlaw-rhel-vm4') {
+            PACKAGES_NO_CVES[0].latest_version = '4.0';
+            PACKAGES_NO_CVES[0].system_version = '4.0';
+            PACKAGES_NO_CVES[0].fixed_version = '3.0';
+            PACKAGES_NO_CVES[1].latest_version = '3.10.0-693';
+            PACKAGES_NO_CVES[1].system_version = '3.10.0-693';
+            PACKAGES_NO_CVES[1].fixed_version = '3.10.0-693';
+        }
+
+        Object.keys(RHSAS).forEach(function (k) {
+            const rhsa = RHSAS[k];
+
+            if (k === 'RHSA-2017:3071') {
+                rhsa.packages = [PACKAGES_NO_CVES[0]];
+            } else {
+                rhsa.packages = [PACKAGES_NO_CVES[1]];
+            }
+        });
+
         obj[key] = {};
         obj[key].system_id = sys.system_id;
         obj[key].system_type = sys.system_type;
@@ -604,9 +637,10 @@ constantsModule.constant('VMAAS_GET_SYSTEM', (function () {
         obj[key].account_number = sys.account_number;
         obj[key].report_count = sys.report_count;
         obj[key].last_check_in = sys.last_check_in;
-        obj[key].packages = PACKAGES_NO_CVES;
-        obj[key].rhsas = [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:3071'],
-                          RHSAS['RHSA-2017:1484'], RHSAS['RHSA-2017:2679'],
+        obj[key].rhsas = [RHSAS['RHSA-2017:2930'],
+                          RHSAS['RHSA-2017:3071'],
+                          RHSAS['RHSA-2017:1484'],
+                          RHSAS['RHSA-2017:2679'],
                           RHSAS['RHSA-2018:0007']];
     });
 
