@@ -207,6 +207,15 @@ function InventoryCtrl(
             getSystemRhsaCounts();
 
             SystemsService.systems = $scope.systems;
+
+            //TODO: get rid of this when api is setup!!!!!!!!!!!
+            $scope.systems.forEach(function (system) {
+                if (VMAAS_SYSTEMS[0].system_id === system.system_id) {
+                    system.rhsa_count = VMAAS_SYSTEMS[0].rhsas.length;
+                } else if (VMAAS_SYSTEMS[1].system_id === system.system_id) {
+                    system.rhsa_count = VMAAS_SYSTEMS[1].rhsas.length;
+                }
+            });
         }
 
         let query = buildRequestQueryParams(true);

@@ -49,7 +49,7 @@
                   ng-change='selectAll(); checkboxes.checkboxChecked(checkboxes.checked, getSelectableSystems())')
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'system_type_id':sorter.reverse", ng-click="sorter.sort('system_type_id')", translate) System Type
               th.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse", ng-click="sorter.sort('toString')", translate) System Name
-              th.sortable(translate) Vulnerabilities
+              th.sortable.min.fit-content(translate) Vulnerabilities
               th.fit-content.min.sortable(ng-class="sorter.predicate | sortClass:'last_check_in':sorter.reverse", ng-click="sorter.sort('last_check_in')", translate) Last Check In
               th.min.sortable(ng-class="sorter.predicate | sortClass:'report_count':sorter.reverse", ng-click="sorter.sort('report_count')", translate) Status
           tbody(ng-show='!loading')
@@ -69,7 +69,7 @@
                 type-icon(type-id='system.system_type_id', include-text='true')
               td.fit-content
                 a(ng-click="showActions(system)") {{system.toString}}
-              td.fit-content.text-center
+              td.fit-content.text-center.min
                 a(ng-click="showActions(system, alse, 'Vulnerabilities')") {{system.rhsa_count}}
               td.fit-content {{ system.last_check_in | timeAgo }}
               td.fit-content
