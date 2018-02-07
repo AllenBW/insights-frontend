@@ -122,3 +122,12 @@ $card-footer: "md-card-footer";
 .page-vulnerabilities-rhsa {
   @include rem('margin-bottom', $global-margin);
 }
+
+
+// Capitalizing the RHSA/CVE in the breadcrumbs
+//==================================================================*/
+
+.page-vulnerabilities-cve,
+.page-vulnerabilities-rhsa {
+  .breadcrumbs span { text-transform: uppercase; }
+}
