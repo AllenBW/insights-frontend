@@ -1,4 +1,5 @@
 .page-vulnerabilities-rhsa(ng-if='!loading')
+  breadcrumbs
   section.vulnerability-details-header
     page-header(title="{{:: rhsa.id}}", subtitle="pageHeaderSubtitle")
     aside.page-header-aside.icon-inline.severity(ng-class="{{'rhsa.severity'}}")
@@ -20,7 +21,7 @@
   section.vulnerability-tables
     .primary
       table-filters
-        search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+        search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
       .table-header
         .dropdown
           md-button.button-dropdown(

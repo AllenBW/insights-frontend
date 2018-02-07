@@ -11,6 +11,7 @@ var statesModule = require('../');
 function VulnerabilitiesCtrl($filter,
                              $location,
                              $scope,
+                             $stateParams,
                              InventoryService,
                              Utils,
                              Events,

@@ -7,18 +7,23 @@ const findAll = require('lodash/filter');
  * @ngInject
  */
 function vulnerabilitiesPackageViewCtrl($scope,
+                                  $state,
                                   $stateParams,
                                   $location,
                                   SystemModalTabs,
                                   Vulnerability,
                                   Rule,
-                                  Events) {
+                                  Events,
+                                  BreadcrumbsService) {
 
     const package_id = $stateParams.package_id;
+    const breadcrumbs = BreadcrumbsService;
     let _allRhsas;
 
     $scope.loading = false;
     $scope.showCVEs = false;
+
+    breadcrumbs.init($stateParams);
 
     // TODO server side search
     $scope.search = function (model) {
@@ -39,6 +44,15 @@ function vulnerabilitiesPackageViewCtrl($scope,
         Vulnerability.getPackage(package_id).then((pkg) => {
             $scope.package = pkg;
             $scope.rhsas = _allRhsas = pkg.rhsas;
+
+            breadcrumbs.setCrumb({
+                label: pkg.name,
+                state: $state.current.name,
+                param: {
+                    package_id: $scope.package_id
+                }
+            }, 1);
+
             initPageHeader();
             $scope.loading = false;
         });
