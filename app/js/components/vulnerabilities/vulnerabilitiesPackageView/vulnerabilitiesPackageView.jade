@@ -1,7 +1,7 @@
 .page-vulnerabilities-package(ng-if='!loading')
   breadcrumbs
   section.vulnerability-details-header
-    page-header(title="Package: {{:: package.name}}", subtitle="pageHeaderSubtitle")
+    page-header(title="Package: {{:: package.id}}", subtitle="pageHeaderSubtitle")
     //.page-header-aside test test
     .description test test
     //.description-aside test test
@@ -17,7 +17,7 @@
           .icon
             i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
           strong
-            a(ui-sref='app.vulnerabilities-package-rhsa({rhsa_id: rhsa.id, package_id: package.name})', ng-click="$event.stopPropagation()")
+            a(ui-sref='app.vulnerabilities-package-rhsa({rhsa_id: rhsa.id, package_id: package.id})', ng-click="$event.stopPropagation()")
               .text {{ rhsa.id }}
           .cve-count
             span {{ rhsa.cves.length }} CVEs

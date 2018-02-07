@@ -11,12 +11,16 @@ function vulnerabilitiesCveViewCtrl($scope,
                                     InsightsConfig,
                                     Utils,
                                     Vulnerability,
-                                    BreadcrumbsService) {
+                                    BreadcrumbsService,
+                                    InventoryService,
+                                    SystemModalTabs) {
 
     const breadcrumbs = BreadcrumbsService;
     breadcrumbs.init($stateParams);
 
     $scope.cve_id = $stateParams.cve_id;
+    $scope.tabs = SystemModalTabs;
+    $scope.showSystem = InventoryService.showSystemModal;
     $scope.checkboxes = new Utils.Checkboxes('system_id');
     $scope.config = InsightsConfig;
 

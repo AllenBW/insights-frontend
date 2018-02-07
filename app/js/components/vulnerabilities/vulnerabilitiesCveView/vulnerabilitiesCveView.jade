@@ -62,7 +62,7 @@
             td.fit-content
               type-icon(type-id='system.system_type_id', include-text='true')
             td.break
-              a(ng-click='showSystem(system)') {{:: system.toString }}
+              a(ng-click='showSystem(system, true, tabs.vulnerabilities)') {{:: system.toString }}
             td.fit-content {{:: system.last_check_in | timeAgo}}
     table.related-packages
         thead
@@ -71,6 +71,6 @@
         tbody
           tr(ng-repeat='package in cve.packages')
             td.fit-content.nowrap
-              a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}
+              a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.id}}
 
   section.content-wrap

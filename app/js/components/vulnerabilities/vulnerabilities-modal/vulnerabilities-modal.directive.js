@@ -1,12 +1,15 @@
 'use strict';
 
 var componentsModule = require('../../');
+const find = require('lodash/find');
+const remove = require('lodash/remove');
 
 /**
  * @ngInject
  */
 function vulnerabilitiesModalCtrl($scope,
                                   $location,
+                                  $stateParams,
                                   Rule,
                                   System,
                                   SystemModalTabs) {
@@ -36,17 +39,41 @@ function vulnerabilitiesModalCtrl($scope,
     //     }
     // }
 
+    getData();
     function getData() {
         System.getVulnerabilities($scope.systemId)
             .then((system) => {
-                console.log(system);
+                system.rhsas = initRhsaOrder(system.rhsas);
                 $scope.system = system;
             });
     }
 
-    $scope.$on('reload:data', getData);
+    $scope.defaultExpanded = function (rhsa) {
+        return (rhsa.id === $stateParams.rhsa_id ||
+                find(rhsa.cves, {id: $stateParams.cve_id}));
+    };
 
-    getData();
+    function initRhsaOrder(rhsas) {
+        let first_rhsa;
+
+        remove(rhsas, function (rhsa) {
+            const bool = $scope.defaultExpanded(rhsa);
+
+            if (bool) {
+                first_rhsa = rhsa;
+            }
+
+            return bool;
+        });
+
+        if (first_rhsa) {
+            rhsas.unshift(first_rhsa);
+        }
+
+        return rhsas;
+    }
+
+    $scope.$on('reload:data', getData);
 }
 
 function vulnerabilitiesModal() {

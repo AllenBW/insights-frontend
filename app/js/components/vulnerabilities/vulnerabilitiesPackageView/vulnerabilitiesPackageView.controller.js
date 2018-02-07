@@ -46,7 +46,7 @@ function vulnerabilitiesPackageViewCtrl($scope,
             $scope.rhsas = _allRhsas = pkg.rhsas;
 
             breadcrumbs.setCrumb({
-                label: pkg.name,
+                label: pkg.id,
                 state: $state.current.name,
                 param: {
                     package_id: $scope.package_id
