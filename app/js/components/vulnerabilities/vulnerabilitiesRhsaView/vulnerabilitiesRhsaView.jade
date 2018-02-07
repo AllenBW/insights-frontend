@@ -83,4 +83,4 @@
         tbody
           tr(ng-repeat='package in rhsa.packages')
             td.fit-content.nowrap
-              a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.name}}
+              a(ui-sref='app.vulnerabilities-package({package_id: package.id})') {{:: package.id}}

@@ -1,7 +1,7 @@
 .vulnerabilities-modal
   .content-wrap
     expand-all-button.toggle-expand-right
-    card.card-vulnerabilities(expandable='true', ng-repeat='rhsa in system.rhsas')
+    card.card-vulnerabilities(expandable='true', ng-repeat="rhsa in system.rhsas", init-collapsed="!defaultExpanded(rhsa)")
 
       card-header-expandable
         .package-info
@@ -23,7 +23,7 @@
               th.min.fit-content Latest Version
           tbody
             tr(ng-repeat="package in rhsa.packages")
-              td.fit-content {{:: package.name}}
+              td.fit-content {{:: package.id}}
               td.fit-content.text-center {{:: package.system_version}}
               td.fit-content.text-center {{:: package.fixed_version}}
               td.fit-content.text-center {{:: package.latest_version}}

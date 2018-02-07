@@ -379,8 +379,7 @@ const RHSAS = {
 };
 
 const PACKAGES_NO_CVES = [{
-    id: 0,
-    name: 'ntp',
+    id: 'ntp',
     release_date: '2017-01-01',
     critical_count: 0,
     important_count: 0,
@@ -402,8 +401,7 @@ const PACKAGES_NO_CVES = [{
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
     rhsas: [RHSAS['RHSA-2017:3071']]
 }, {
-    id: 1,
-    name: 'kernel',
+    id: 'kernel',
     release_date: '2014-06-10',
     systems_affected: 2,
     critical_count: 0,
@@ -505,7 +503,7 @@ constantsModule.constant('VMAAS_GET_ALL_PACKAGES', (function () {
     const array = [];
     PACKAGES_NO_CVES.forEach(function (obj) {
         array.push({
-            id: obj.name,
+            id: obj.id,
             systems_affected: obj.systems_affected,
             rhsa_count: obj.rhsa_count,
             cve_count: obj.cve_count,
