@@ -654,4 +654,15 @@ constantsModule.constant('VMAAS_SYSTEMS', [{
     rhsas: [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:3071'],
             RHSAS['RHSA-2017:1484'], RHSAS['RHSA-2017:2679'],
             RHSAS['RHSA-2018:0007']]
+}, {
+    system_id: '66a6d090-e1dc-4036-b29f-c0b8cfde433d',
+    system_type_id: 105,
+    toString: 'kinlaw-rhel-vm4',
+    account_number: '540155',
+    report_count: 6,
+    last_check_in: '2018-01-17T13:16:31.000Z',
+    packages: PACKAGES_NO_CVES,
+    rhsas: [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:3071'],
+            RHSAS['RHSA-2017:1484'], RHSAS['RHSA-2017:2679'],
+            RHSAS['RHSA-2018:0007']]
 }]);
