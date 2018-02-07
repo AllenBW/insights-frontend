@@ -14,6 +14,8 @@
       card-content(collapse="card.collapsed")
         h2.section-title.section-title-red Description
         p {{:: rhsa.description}}
+
+        h2.section-title.section-title-red Package Information
         table
           thead
             tr
@@ -27,6 +29,8 @@
               td {{:: package.system_version}}
               td {{:: package.fixed_version}}
               td {{:: package.latest_version}}
+
+        h2.section-title.section-title-red CVE Information
         table
           thead
             tr
@@ -40,6 +44,6 @@
               td {{:: cve.id}}
               td {{:: cve.score}}
               td {{:: cve.public_date}}
-              td {{:: cve.impact}}
+              td.impact-cve(ng-class="{{'cve.impact'}}") {{:: cve.impact}}
               td
                 a(href="{{cve.link}}", target="_blank") {{:: cve.link}}
