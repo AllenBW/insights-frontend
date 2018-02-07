@@ -40,7 +40,7 @@
                   |{{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
 
           ul.cve-id
-            li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)') 
+            li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)')
               a(ng-class='{active: cve.id === selectedCVE.id}') {{ cve.id }}
               i.fa.fa-book(ng-if='selectedCVE.insights_rule', tooltip="{{'This RHSA has an insights rule hit' | translate}}")
 
