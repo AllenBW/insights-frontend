@@ -32,9 +32,11 @@ function VulnerabilitiesCtrl($filter,
                     {selected_view: $scope.selectedView},
                     {notify: false});
 
-    $scope.sorter = new Utils.Sorter({
-        predicate: 'name',
-        reverse: false},
+    $scope.sorter = new Utils.Sorter(
+        {
+            predicate: $location.search().sort_by || 'id',
+            reverse: $location.search().reverse || false
+        },
         order);
 
     /*
@@ -44,6 +46,8 @@ function VulnerabilitiesCtrl($filter,
         $scope.loading = true;
         let params = [];
         params.search_term = $scope.searchText;
+        params.sort_by = $scope.sorter.predicate;
+        params.sort_dir = $scope.sorter.reverse ? 'DESC' : 'ASC';
 
         if ($scope.selectedView === $scope.views.package) {
             Vulnerability.getPackages(params).then((vulnerabilities) => {
@@ -83,6 +87,12 @@ function VulnerabilitiesCtrl($filter,
     }
 
     function order () {
+        $location.search('sort_by', $scope.sorter.predicate);
+        $location.search('reverse', $scope.sorter.reverse);
+
+        // TODO: use this once api is available
+        // getData();
+
         $scope.allVulnerabilities = $filter('orderBy')(
             $scope.allVulnerabilities,
             [($scope.sorter.reverse ?

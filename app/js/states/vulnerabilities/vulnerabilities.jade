@@ -29,12 +29,11 @@
         table
           thead
             tr
-              th.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
-                ng-click="sort('toString')", translate) Package Name
-              th.text-center.fit-content.min.nowrap.sortable(translate) Systems
-              th.text-center.fit-content.min.nowrap.sortable(translate) RHSAs
-              th.text-center.fit-content.min.nowrap.sortable(translate) CVEs
-              th.text-center.fit-content.min.nowrap.sortable(translate) Release Date
+              th.fit-content.nowrap.sortable(ng-class="sorter.getSortClass('id')", ng-click="sorter.sort('id')", translate) Package Name
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('systems_affected')", ng-click="sorter.sort('systems_affected')") Systems
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('rhsa_count')", ng-click="sorter.sort('rhsa_count')") RHSAs
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('cve_count')", ng-click="sorter.sort('cve_count')") CVEs
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('release_date')", ng-click="sorter.sort('release_date')") Release Date
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
@@ -51,12 +50,11 @@
         table
           thead
             tr
-              th.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
-                ng-click="sort('toString')", translate) RHSA Name
-              th.text-center.fit-content.min.nowrap.sortable(translate) Systems
-              th.text-center.fit-content.min.nowrap.sortable(translate) Packages
-              th.text-center.fit-content.min.nowrap.sortable(translate) CVEs
-              th.text-center.fit-content.min.nowrap.sortable(translate) Release Date
+              th.fit-content.nowrap.sortable(translate, ng-class="sorter.getSortClass('id')", ng-click="sorter.sort('id')") RHSA Name
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('systems_affected')", ng-click="sorter.sort('systems_affected')") Systems
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('package_count')", ng-click="sorter.sort('package_count')") Packages
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('cve_count')", ng-click="sorter.sort('cve_count')") CVEs
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('issued')", ng-click="sorter.sort('issued')") Release Date
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
@@ -73,11 +71,10 @@
         table
           thead
             tr
-              th.fit-content.nowrap.sortable(ng-class="sorter.predicate | sortClass:'toString':sorter.reverse",
-                ng-click="sort('toString')", translate) CVE Name
-              th.text-center.fit-content.min.nowrap.sortable(translate) Systems
-              th.text-center.fit-content.min.nowrap.sortable(translate) Packages
-              th.text-center.fit-content.min.nowrap.sortable(translate) Release Date
+              th.fit-content.nowrap.sortable(translate, ng-class="sorter.getSortClass('id')", ng-click="sorter.sort('id')") CVE Name
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('systems_affected')", ng-click="sorter.sort('systems_affected')") Systems
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('package_count')", ng-click="sorter.sort('package_count')") Packages
+              th.text-center.fit-content.min.nowrap.sortable(translate, ng-class="sorter.getSortClass('public_date')", ng-click="sorter.sort('public_date')") Release Date
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
