@@ -1,7 +1,5 @@
 .vulnerabilities-modal
   .content-wrap
-    table-filters
-      search-box(placeholder="{{'Search RHSA or CVE' | translate}}", on-search='search(model)')
     expand-all-button.toggle-expand-right
     card.card-vulnerabilities(expandable='true', ng-repeat='rhsa in system.rhsas')
 
@@ -19,31 +17,33 @@
         table
           thead
             tr
-              th Packages Installed
-              th Your version
-              th Fixed Version
-              th Latest Version
+              th.sortable Packages Installed
+              th.min.fit-content Your Version
+              th.min.fit-content Fixed Version
+              th.min.fit-content Latest Version
           tbody
             tr(ng-repeat="package in rhsa.packages")
-              td {{:: package.name}}
-              td {{:: package.system_version}}
-              td {{:: package.fixed_version}}
-              td {{:: package.latest_version}}
+              td.fit-content {{:: package.name}}
+              td.fit-content.text-center {{:: package.system_version}}
+              td.fit-content.text-center {{:: package.fixed_version}}
+              td.fit-content.text-center {{:: package.latest_version}}
 
         h2.section-title.section-title-red CVE Information
         table
           thead
             tr
-              th CVEs
-              th Score
-              th Public Date
-              th Impact
-              th View In Portal
+              th.sortable CVEs
+              th.sortable.min.fit-content.text-center Score
+              th.sortable.min.fit-content Public Date
+              th.sortable.min.fit-content Impact
+              th.min.fit-content View In Portal
           tbody
             tr(ng-repeat="cve in rhsa.cves")
               td {{:: cve.id}}
               td {{:: cve.score}}
               td {{:: cve.public_date}}
-              td.impact-cve(ng-class="{{'cve.impact'}}") {{:: cve.impact}}
-              td
+              td.icon-inline.impact-cve(ng-class="{{'cve.impact'}}")
+                i.fa.fa-shield
+                span {{:: cve.impact}}
+              td.fit-content
                 a(href="{{cve.link}}", target="_blank") {{:: cve.link}}
