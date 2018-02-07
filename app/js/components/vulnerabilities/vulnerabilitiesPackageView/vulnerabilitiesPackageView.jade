@@ -1,4 +1,5 @@
 .page-vulnerabilities-package(ng-if='!loading')
+  breadcrumbs
   section.vulnerability-details-header
     page-header(title="Package: {{:: package.name}}", subtitle="pageHeaderSubtitle")
     //.page-header-aside test test
@@ -6,7 +7,7 @@
     //.description-aside test test
 
   table-filters
-    search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
+    search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
 
   section.content-wrap
     // TODO make Summary Card a component
@@ -16,7 +17,7 @@
           .icon
             i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
           strong
-            a(ui-sref='app.vulnerabilities-rhsa({rhsa_id: rhsa.id})', ng-click="$event.stopPropagation()")
+            a(ui-sref='app.vulnerabilities-package-rhsa({rhsa_id: rhsa.id, package_id: package.name})', ng-click="$event.stopPropagation()")
               .text {{ rhsa.id }}
           .cve-count
             span {{ rhsa.cves.length }} CVEs

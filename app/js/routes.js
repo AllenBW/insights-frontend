@@ -162,6 +162,14 @@ function Routes($stateProvider) {
             title: 'Vulnerabilities'
         })
 
+        .state('app.vulnerabilities-package-rhsa', {
+            url: '/vulnerabilities/package/:package_id/rhsa/:rhsa_id',
+            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
+            '/vulnerabilitiesRhsaView.html',
+            controller: 'vulnerabilitiesRhsaViewCtrl',
+            title: 'Vulnerabilities'
+        })
+
         .state('app.vulnerabilities-rhsa', {
             url: '/vulnerabilities/rhsa/:rhsa_id',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +

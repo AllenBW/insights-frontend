@@ -38,7 +38,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-package({package_id: vulnerability.id})') {{:: vulnerability.name}}
+                a(ui-sref='app.vulnerabilities-package({package_id: vulnerability.id})') {{:: vulnerability.id}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap

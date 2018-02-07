@@ -6,10 +6,15 @@ const componentsModule = require('../../');
  * @ngInject
  */
 function vulnerabilitiesCveViewCtrl($scope,
-                                     $stateParams,
-                                     InsightsConfig,
-                                     Utils,
-                                     Vulnerability) {
+                                    $stateParams,
+                                    $state,
+                                    InsightsConfig,
+                                    Utils,
+                                    Vulnerability,
+                                    BreadcrumbsService) {
+
+    const breadcrumbs = BreadcrumbsService;
+    breadcrumbs.init($stateParams);
 
     $scope.cve_id = $stateParams.cve_id;
     $scope.checkboxes = new Utils.Checkboxes('system_id');
@@ -36,6 +41,13 @@ function vulnerabilitiesCveViewCtrl($scope,
     function getData () {
         Vulnerability.getCVE($scope.cve_id).then((cve) => {
             $scope.cve = cve;
+            breadcrumbs.setCrumb({
+                label: cve.id,
+                state: $state.current.name,
+                param: {
+                    cve_id: $scope.cve_id
+                }
+            }, 1);
             $scope.totalSystems = cve.systems_affected;
             initPageHeader();
         });

@@ -494,7 +494,6 @@ constantsModule.constant('VMAAS_GET_ALL_CVES', (function () {
  * app/js/api/vulnerability.js:getPackages
  *
  *     data_needed = {
- *         id: String/Number,
  *         name: String,
  *         systems_affected: Number,
  *         cve_count: Number,
@@ -506,8 +505,7 @@ constantsModule.constant('VMAAS_GET_ALL_PACKAGES', (function () {
     const array = [];
     PACKAGES_NO_CVES.forEach(function (obj) {
         array.push({
-            id: obj.id,
-            name: obj.name,
+            id: obj.name,
             systems_affected: obj.systems_affected,
             rhsa_count: obj.rhsa_count,
             cve_count: obj.cve_count,
