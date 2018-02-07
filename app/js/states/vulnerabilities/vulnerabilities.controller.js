@@ -11,6 +11,7 @@ var statesModule = require('../');
 function VulnerabilitiesCtrl($filter,
                              $location,
                              $scope,
+                             $state,
                              $stateParams,
                              InventoryService,
                              Utils,
@@ -19,14 +20,17 @@ function VulnerabilitiesCtrl($filter,
                              SystemModalTabs,
                              VulnerabilitiesViews) {
 
-    const DEFAULT_VIEW = VulnerabilitiesViews.package;
     let _allVulnerabilities;
 
     $scope.views = VulnerabilitiesViews;
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
     $scope.vulnerabilities = [];
-    $scope.selectedView = DEFAULT_VIEW;
+    $scope.selectedView = $stateParams.selected_view || $scope.views.package;
+
+    $state.transitionTo($state.current.name,
+                    {selected_view: $scope.selectedView},
+                    {notify: false});
 
     $scope.sorter = new Utils.Sorter(
         {
@@ -66,6 +70,8 @@ function VulnerabilitiesCtrl($filter,
         }
     }
 
+    getData();
+
     function setVulnerabilities() {
         let page = $scope.pager.currentPage - 1;
         let pageSize = $scope.pager.perPage;
@@ -98,6 +104,8 @@ function VulnerabilitiesCtrl($filter,
 
     $scope.changeView = function (view) {
         if (view !== $scope.selectedView) {
+            $state.transitionTo($state.current.name,
+                    {selected_view: view}, {notify: false});
             $scope.selectedView = view;
             getData();
         }
@@ -139,8 +147,6 @@ function VulnerabilitiesCtrl($filter,
         reloadDataListener();
         filterResetListener();
     });
-
-    getData();
 }
 
 statesModule.controller('VulnerabilitiesCtrl', VulnerabilitiesCtrl);

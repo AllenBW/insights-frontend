@@ -71,7 +71,7 @@ function BreadcrumbsService($state) {
                     label: 'Vulnerabilities',
                     state: 'app.vulnerabilities',
                     params: {
-                        id: null
+                        selected_view: $stateParams.selected_view
                     }
                 }];
 

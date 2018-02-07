@@ -3,7 +3,7 @@
 const constantsModule = require('./');
 
 constantsModule.constant('VulnerabilitiesViews', {
-    package: 'Package',
-    rhsa: 'RHSA',
-    cve: 'CVE'
+    package: 'Packages',
+    rhsa: 'RHSAs',
+    cve: 'CVEs'
 });
