@@ -7,7 +7,8 @@ $card-footer: "md-card-footer";
 .page-vulnerabilities,
 .page-vulnerabilities-cve,
 .page-vulnerabilities-package,
-.page-vulnerabilities-rhsa {
+.page-vulnerabilities-rhsa,
+.vulnerabilities-modal {
 
   .critical { color: $vul-critical; }
   .important { color: $vul-important; }
@@ -85,7 +86,7 @@ $card-footer: "md-card-footer";
 // Severities are returned in all lowercase. Capitalize first letter
 //==================================================================*/
 
-.severity-rhsa {
+.severity-rhsa, .impact-cve {
   text-transform: capitalize;
 }
 
