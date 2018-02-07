@@ -38,7 +38,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-package({package_id: vulnerability.id})') {{:: vulnerability.id}}
+                a(ui-sref='app.vulnerabilities-package({package_id: vulnerability.id, selected_view: selectedView})') {{:: vulnerability.id}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap
@@ -60,7 +60,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-rhsa({rhsa_id: vulnerability.id})') {{:: vulnerability.id}}
+                a(ui-sref='app.vulnerabilities-rhsa({rhsa_id: vulnerability.id, selected_view: selectedView})') {{:: vulnerability.id}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap
@@ -81,7 +81,7 @@
           tbody
             tr(ng-repeat='vulnerability in vulnerabilities track by vulnerability.id')
               td.fit-content.nowrap
-                a(ui-sref='app.vulnerabilities-cve({cve_id: vulnerability.id})') {{:: vulnerability.id}}
+                a(ui-sref='app.vulnerabilities-cve({cve_id: vulnerability.id, selected_view: selectedView})') {{:: vulnerability.id}}
               td.text-center.fit-content.nowrap
                 span {{:: vulnerability.systems_affected}}
               td.text-center.fit-content.nowrap

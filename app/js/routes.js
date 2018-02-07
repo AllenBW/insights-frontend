@@ -148,42 +148,54 @@ function Routes($stateProvider) {
     // Vulnerabilities routes
     $stateProvider
         .state('app.vulnerabilities', {
-            url: '/vulnerabilities?offline&online&rhsaSeverity&daysKnown',
+            url: '/vulnerabilities/{selected_view}?offline&online&rhsaSeverity&daysKnown',
             templateUrl: 'js/states/vulnerabilities/vulnerabilities.html',
             controller: 'VulnerabilitiesCtrl',
             title: 'Vulnerabilities'
         })
 
         .state('app.vulnerabilities-package', {
-            url: '/vulnerabilities/package/:package_id',
+            url: '/vulnerabilities/Package/:package_id',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesPackageView' +
             '/vulnerabilitiesPackageView.html',
             controller: 'vulnerabilitiesPackageViewCtrl',
-            title: 'Vulnerabilities'
+            title: 'Vulnerabilities',
+            params: {
+                selected_view: null
+            }
         })
 
         .state('app.vulnerabilities-package-rhsa', {
-            url: '/vulnerabilities/package/:package_id/rhsa/:rhsa_id',
+            url: '/vulnerabilities/Package/:package_id/RHSA/:rhsa_id',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
-            title: 'Vulnerabilities'
+            title: 'Vulnerabilities',
+            params: {
+                selected_view: null
+            }
         })
 
         .state('app.vulnerabilities-rhsa', {
-            url: '/vulnerabilities/rhsa/:rhsa_id',
+            url: '/vulnerabilities/RHSA/:rhsa_id',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
-            title: 'Vulnerabilities'
+            title: 'Vulnerabilities',
+            params: {
+                selected_view: null
+            }
         })
 
         .state('app.vulnerabilities-cve', {
-            url: '/vulnerabilities/cve/:cve_id',
+            url: '/vulnerabilities/CVE/:cve_id',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesCveView' +
             '/vulnerabilitiesCveView.html',
             controller: 'vulnerabilitiesCveViewCtrl',
-            title: 'Vulnerabilities'
+            title: 'Vulnerabilities',
+            params: {
+                selected_view: null
+            }
         });
 
     // Common announcements routes
