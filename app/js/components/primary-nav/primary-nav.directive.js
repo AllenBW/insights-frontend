@@ -48,6 +48,7 @@ function primaryNavCtrl($scope, Utils, $state, InsightsConfig, User, InsightsJwt
         vulnerabilities: [
             'app.vulnerabilities',
             'app.vulnerabilities-rhsa',
+            'app.vulnerabilities-cve',
             'app.vulnerabilities-package'
         ]
     };
