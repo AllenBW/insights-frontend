@@ -32,6 +32,7 @@ function InventoryCtrl(
         ActionbarService,
         Export,
         Group,
+        SystemModalTabs,
         VMAAS_SYSTEMS) {
     const DEFAULT_PAGE_SIZE = 15;
     const DEFAULT_PREDICATE = 'toString';
@@ -67,6 +68,7 @@ function InventoryCtrl(
     $scope.actionFilter = null;
     $scope.loading = InventoryService.loading;
     $scope.reloading = false;
+    $scope.modalTabs = SystemModalTabs;
 
     FilterService.parseBrowserQueryParams();
     System.getProductSpecificData();
