@@ -131,3 +131,18 @@ $card-footer: "md-card-footer";
 .page-vulnerabilities-rhsa {
   .breadcrumbs span { text-transform: uppercase; }
 }
+
+
+// Adding external link to page header
+//==================================================================*/
+
+.page-vulnerabilities-cve,
+.page-vulnerabilities-rhsa {
+  .page-header {
+    h1 { display: inline-block; }
+    .fa-external-link {
+      @include font-size(20px);
+      @include rem('padding-left', 10px);
+    }
+  }
+}
