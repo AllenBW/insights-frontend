@@ -415,11 +415,7 @@ const PACKAGES_NO_CVES = [{
                 RHSAS['RHSA-2018:0007'].cves.length,
     version: '3.10.0-693',
     description: `
-        The kernel is the essential center of a computer system the core
-        that provides basic services for all other parts of the operating
-        system. A synonym is nucleus. A kernel can be contrasted with a
-        shell, the outermost part of an operating system that interacts
-        with user commands.`,
+        The kernel meta package.`,
     systems: [SYSTEMS['kinlaw-rhel-vm'], SYSTEMS['kinlaw-rhel-vm4']],
     rhsas: [RHSAS['RHSA-2017:2930'], RHSAS['RHSA-2017:1484'],
             RHSAS['RHSA-2017:2679'], RHSAS['RHSA-2018:0007']]

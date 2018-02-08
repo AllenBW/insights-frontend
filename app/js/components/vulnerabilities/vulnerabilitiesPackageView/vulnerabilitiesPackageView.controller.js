@@ -22,6 +22,7 @@ function vulnerabilitiesPackageViewCtrl($scope,
 
     $scope.loading = false;
     $scope.showCVEs = false;
+    $scope.selectedView = $stateParams.root_view;
 
     breadcrumbs.init($stateParams);
 
