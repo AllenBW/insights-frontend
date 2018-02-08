@@ -157,7 +157,7 @@ function Routes($stateProvider) {
 
         .state('app.vulnerabilities-package', {
             url: '/vulnerabilities/Package/:package_id?root_view',
-            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesPackageView' +
+            templateUrl: 'js/states/vulnerabilities/vulnerabilitiesPackageView' +
             '/vulnerabilitiesPackageView.html',
             controller: 'vulnerabilitiesPackageViewCtrl',
             title: 'Vulnerabilities'
@@ -166,7 +166,7 @@ function Routes($stateProvider) {
         // Used so you can back track to the package using breadcrumbs
         .state('app.vulnerabilities-package-rhsa', {
             url: '/vulnerabilities/Package/:package_id/RHSA/:rhsa_id?root_view',
-            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
+            templateUrl: 'js/states/vulnerabilities/vulnerabilitiesRhsaView' +
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
             title: 'Vulnerabilities'
@@ -174,7 +174,7 @@ function Routes($stateProvider) {
 
         .state('app.vulnerabilities-rhsa', {
             url: '/vulnerabilities/RHSA/:rhsa_id?root_view',
-            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
+            templateUrl: 'js/states/vulnerabilities/vulnerabilitiesRhsaView' +
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
             title: 'Vulnerabilities'
@@ -182,7 +182,7 @@ function Routes($stateProvider) {
 
         .state('app.vulnerabilities-cve', {
             url: '/vulnerabilities/CVE/:cve_id?root_view',
-            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesCveView' +
+            templateUrl: 'js/states/vulnerabilities/vulnerabilitiesCveView' +
             '/vulnerabilitiesCveView.html',
             controller: 'vulnerabilitiesCveViewCtrl',
             title: 'Vulnerabilities'
