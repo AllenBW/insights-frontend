@@ -62,7 +62,7 @@
             .iava(ng-if='selectedCVE.iava')
               b IAVA:
               |  {{ selectedCVE.iava }}
-            .cwe(ng-if='selectedCVE.cwe')
-              b CWE:
-              |  {{ selectedCVE.cwe }}
+            .cwe(ng-if='selectedCVE.cwes.length > 0')
+              b CWEs:
+                a(ng-repeat="cwe in selectedCVE.cwes", href="{{:: cwe.link}}", target="_blank") {{ cwe.id }}
 
