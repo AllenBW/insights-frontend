@@ -18,12 +18,6 @@ function vulnerabilitiesModalCtrl($scope,
         return rhsa.rule_hits === 1 ? '1 Hit' : `${rhsa.rule_hits} Hits`;
     };
 
-    $scope.hasVulnerabilities = function () {
-        return $scope.system &&
-               $scope.system.rhsas &&
-               $scope.system.rhsas.length > 0;
-    };
-
     $scope.defaultExpanded = function (rhsa) {
         return (rhsa.id === $stateParams.rhsa_id ||
                 find(rhsa.cves, {id: $stateParams.cve_id}));
@@ -52,23 +46,16 @@ function vulnerabilitiesModalCtrl($scope,
 
     getData();
     function getData() {
-        $scope.loading = true;
         System.getVulnerabilities($scope.systemId)
             .then((system) => {
                 if (system) {
                     system.rhsas = initRhsaOrder(system.rhsas);
                     $scope.system = system;
                 }
-
-                $scope.loading = false;
             });
     }
 
     function initRhsaOrder(rhsas) {
-        if (!rhsas) {
-            return [];
-        }
-
         let first_rhsa;
         remove(rhsas, function (rhsa) {
             const bool = $scope.defaultExpanded(rhsa);
