@@ -118,7 +118,7 @@ function VulnerabilitiesCtrl($filter,
             $scope.allVulnerabilities = [];
             _allVulnerabilities.forEach((vulnerability) => {
                 if (($scope.selectedView === $scope.views.package &&
-                    vulnerability.name.indexOf(model) !== -1) ||
+                    vulnerability.id.indexOf(model) !== -1) ||
                     ($scope.selectedView === $scope.views.rhsa &&
                     vulnerability.id.indexOf(model) !== -1) ||
                     ($scope.selectedView === $scope.views.cve &&
