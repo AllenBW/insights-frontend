@@ -52,7 +52,7 @@
             a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
               i.fa.fa-external-link
             a.cve-page-redirect(ui-sref='app.vulnerabilities-package-cve({cve_id: selectedCVE.id, package_id: package.id, root_view: selectedView})')
-              | Go To {{:: selectedCVE.id}} Page
+              | Go to {{:: selectedCVE.id}} page
           .cve-information
             .impact
               b Impact:
@@ -64,6 +64,6 @@
               b IAVA:
               |  {{ selectedCVE.iava }}
             .cwe(ng-if='selectedCVE.cwes.length > 0')
-              b CWEs:
+              b CWEs: 
                 a(ng-repeat="cwe in selectedCVE.cwes", href="{{:: cwe.link}}", target="_blank") {{ cwe.id }}
 
