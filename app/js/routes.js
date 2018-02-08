@@ -191,7 +191,7 @@ function Routes($stateProvider) {
         // Used so you can back track to the package using breadcrumbs
         .state('app.vulnerabilities-package-cve', {
             url: '/vulnerabilities/Package/:package_id/CVE/:cve_id?root_view',
-            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesCveView' +
+            templateUrl: 'js/states/vulnerabilities/vulnerabilitiesCveView' +
             '/vulnerabilitiesCveView.html',
             controller: 'vulnerabilitiesCveViewCtrl',
             title: 'Vulnerabilities'
