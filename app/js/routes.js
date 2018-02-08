@@ -148,54 +148,53 @@ function Routes($stateProvider) {
     // Vulnerabilities routes
     $stateProvider
         .state('app.vulnerabilities', {
-            url: '/vulnerabilities/{selected_view}?offline&online&rhsaSeverity&daysKnown',
+            url: '/vulnerabilities?root_view&offline&online&' +
+                 'rhsaSeverity&daysKnown',
             templateUrl: 'js/states/vulnerabilities/vulnerabilities.html',
             controller: 'VulnerabilitiesCtrl',
             title: 'Vulnerabilities'
         })
 
         .state('app.vulnerabilities-package', {
-            url: '/vulnerabilities/Package/:package_id',
+            url: '/vulnerabilities/Package/:package_id?root_view',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesPackageView' +
             '/vulnerabilitiesPackageView.html',
             controller: 'vulnerabilitiesPackageViewCtrl',
-            title: 'Vulnerabilities',
-            params: {
-                selected_view: null
-            }
+            title: 'Vulnerabilities'
         })
 
+        // Used so you can back track to the package using breadcrumbs
         .state('app.vulnerabilities-package-rhsa', {
-            url: '/vulnerabilities/Package/:package_id/RHSA/:rhsa_id',
+            url: '/vulnerabilities/Package/:package_id/RHSA/:rhsa_id?root_view',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
-            title: 'Vulnerabilities',
-            params: {
-                selected_view: null
-            }
+            title: 'Vulnerabilities'
         })
 
         .state('app.vulnerabilities-rhsa', {
-            url: '/vulnerabilities/RHSA/:rhsa_id',
+            url: '/vulnerabilities/RHSA/:rhsa_id?root_view',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesRhsaView' +
             '/vulnerabilitiesRhsaView.html',
             controller: 'vulnerabilitiesRhsaViewCtrl',
-            title: 'Vulnerabilities',
-            params: {
-                selected_view: null
-            }
+            title: 'Vulnerabilities'
         })
 
         .state('app.vulnerabilities-cve', {
-            url: '/vulnerabilities/CVE/:cve_id',
+            url: '/vulnerabilities/CVE/:cve_id?root_view',
             templateUrl: 'js/components/vulnerabilities/vulnerabilitiesCveView' +
             '/vulnerabilitiesCveView.html',
             controller: 'vulnerabilitiesCveViewCtrl',
-            title: 'Vulnerabilities',
-            params: {
-                selected_view: null
-            }
+            title: 'Vulnerabilities'
+        })
+
+        // Used so you can back track to the package using breadcrumbs
+        .state('app.vulnerabilities-package-cve', {
+            url: '/vulnerabilities/Package/:package_id/CVE/:cve_id?root_view',
+            templateUrl: 'js/components/vulnerabilities/vulnerabilitiesCveView' +
+            '/vulnerabilitiesCveView.html',
+            controller: 'vulnerabilitiesCveViewCtrl',
+            title: 'Vulnerabilities'
         });
 
     // Common announcements routes

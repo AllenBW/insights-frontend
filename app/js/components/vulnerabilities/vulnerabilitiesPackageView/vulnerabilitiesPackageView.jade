@@ -3,11 +3,12 @@
   section.vulnerability-details-header
     page-header(title="Package: {{:: package.id}}", subtitle="pageHeaderSubtitle")
     //.page-header-aside test test
-    .description test test
+    .description
+      | {{:: package.description}}
     //.description-aside test test
 
   table-filters
-    search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
+    search-box(placeholder="{{'Search RHSAs' | translate}}", on-search='search(model)')
 
   section.content-wrap
     // TODO make Summary Card a component
@@ -17,7 +18,8 @@
           .icon
             i.fa.fa-shield(ng-class="{{'rhsa.severity'}}")
           strong
-            a(ui-sref='app.vulnerabilities-package-rhsa({rhsa_id: rhsa.id, package_id: package.id})', ng-click="$event.stopPropagation()")
+            a(ui-sref='app.vulnerabilities-package-rhsa({rhsa_id: rhsa.id, package_id: package.id, root_view: selectedView})',
+              ng-click="$event.stopPropagation()")
               .text {{ rhsa.id }}
           .cve-count
             span {{ rhsa.cves.length }} CVEs
@@ -48,6 +50,8 @@
             trimmed-text(length="300", text="{{selectedCVE.description}}")
             a.cve-link(href="{{selectedCVE.link}}", target="_blank") More
               i.fa.fa-external-link
+            a.cve-page-redirect(ui-sref='app.vulnerabilities-package-cve({cve_id: selectedCVE.id, package_id: package.id, root_view: selectedView})')
+              | Go To {{:: selectedCVE.id}} Page
           .cve-information
             .impact
               b Impact:

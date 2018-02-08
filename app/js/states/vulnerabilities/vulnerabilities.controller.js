@@ -26,11 +26,8 @@ function VulnerabilitiesCtrl($filter,
     $scope.pager = new Utils.Pager();
     $scope.searchText = $location.search().searchText;
     $scope.vulnerabilities = [];
-    $scope.selectedView = $stateParams.selected_view || $scope.views.package;
-
-    $state.transitionTo($state.current.name,
-                    {selected_view: $scope.selectedView},
-                    {notify: false});
+    $scope.selectedView = $location.search().root_view || $scope.views.package;
+    $location.search('root_view', $scope.selectedView);
 
     $scope.sorter = new Utils.Sorter(
         {
@@ -104,8 +101,7 @@ function VulnerabilitiesCtrl($filter,
 
     $scope.changeView = function (view) {
         if (view !== $scope.selectedView) {
-            $state.transitionTo($state.current.name,
-                    {selected_view: view}, {notify: false});
+            $location.search('root_view', view);
             $scope.selectedView = view;
             getData();
         }

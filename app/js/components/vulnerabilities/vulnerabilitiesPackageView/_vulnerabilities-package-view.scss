@@ -125,6 +125,11 @@ $card-footer: "md-card-footer";
   .description {
     grid-area: description;
     grid-row: auto;
+
+    .cve-page-redirect {
+      display: block;
+      @include rem('padding-top', $global-padding);
+    }
   }
 
   .rule-hit { grid-area: rule-hit; }
