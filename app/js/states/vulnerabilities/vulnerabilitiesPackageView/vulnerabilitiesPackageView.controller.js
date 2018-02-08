@@ -1,6 +1,6 @@
 'use strict';
 
-const componentsModule = require('../../');
+const statesModule = require('../../');
 const findAll = require('lodash/filter');
 
 /**
@@ -130,6 +130,8 @@ function vulnerabilitiesPackageViewCtrl($scope,
 
     const RhsaFilterListener = $scope.$on(Events.filters.rhsaSeverity,
         function (event, filter) {
+            $scope.selectedRHSA = null;
+
             if (filter.length === 0) {
                 $scope.rhsas = _allRhsas;
                 return;
@@ -148,5 +150,5 @@ function vulnerabilitiesPackageViewCtrl($scope,
     $scope.$on('$destroy', RhsaFilterListener);
 }
 
-componentsModule.controller('vulnerabilitiesPackageViewCtrl',
+statesModule.controller('vulnerabilitiesPackageViewCtrl',
   vulnerabilitiesPackageViewCtrl);

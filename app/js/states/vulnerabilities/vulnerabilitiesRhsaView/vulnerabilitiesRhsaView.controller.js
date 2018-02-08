@@ -1,6 +1,6 @@
 'use strict';
 
-const componentsModule = require('../../');
+const statesModule = require('../../');
 
 /**
  * @ngInject
@@ -92,5 +92,5 @@ function vulnerabilitiesRhsaViewCtrl($filter,
     };
 }
 
-componentsModule.controller('vulnerabilitiesRhsaViewCtrl',
+statesModule.controller('vulnerabilitiesRhsaViewCtrl',
   vulnerabilitiesRhsaViewCtrl);
