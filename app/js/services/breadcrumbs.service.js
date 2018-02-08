@@ -18,7 +18,8 @@ function BreadcrumbsService($state) {
             'app.vulnerabilities-rhsa',
             'app.vulnerabilities-package',
             'app.vulnerabilities-cve',
-            'app.vulnerabilities-package-rhsa'
+            'app.vulnerabilities-package-rhsa',
+            'app.vulnerabilities-package-cve'
         ]
     };
 
@@ -71,11 +72,12 @@ function BreadcrumbsService($state) {
                     label: 'Vulnerabilities',
                     state: 'app.vulnerabilities',
                     params: {
-                        selected_view: $stateParams.selected_view
+                        root_view: $stateParams.root_view
                     }
                 }];
 
-                if ($stateParams.rhsa_id && $stateParams.package_id) {
+                if (($stateParams.rhsa_id || $stateParams.cve_id) &&
+                    $stateParams.package_id) {
                     crumbs.push({
                         label: $stateParams.package_id,
                         state: 'app.vulnerabilities-package',

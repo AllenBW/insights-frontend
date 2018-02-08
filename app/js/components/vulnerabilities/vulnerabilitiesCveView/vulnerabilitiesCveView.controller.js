@@ -53,13 +53,14 @@ function vulnerabilitiesCveViewCtrl($filter,
     function getData () {
         Vulnerability.getCVE($scope.cve_id).then((cve) => {
             $scope.cve = cve;
-            breadcrumbs.setCrumb({
+            breadcrumbs.add({
                 label: cve.id,
                 state: $state.current.name,
                 param: {
                     cve_id: $scope.cve_id
                 }
-            }, 1);
+            });
+
             $scope.affectedSystems = cve.systems;
             initPageHeader();
         });
