@@ -3,7 +3,7 @@
     expand-all-button.toggle-expand-right
     card.card-vulnerabilities(expandable='true', ng-repeat="rhsa in system.rhsas", init-collapsed="!defaultExpanded(rhsa)")
 
-      card-header-expandable
+      card-header-expandable.gray
         .package-info
           h3.title {{:: rhsa.id}}
           date.date Release Date: {{:: rhsa.issued}}

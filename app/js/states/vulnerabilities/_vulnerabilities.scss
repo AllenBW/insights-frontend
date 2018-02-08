@@ -63,7 +63,7 @@ $card-footer: "md-card-footer";
   .package-info {
     .date, .version {
       display: inline-block;
-      color: $gray-subhead;
+      color: $black-base;
       @include rem('margin-top', 5px);
       font-weight: 500;
     }
