@@ -5,7 +5,9 @@ const componentsModule = require('../../');
 /**
  * @ngInject
  */
-function vulnerabilitiesCveViewCtrl($scope,
+function vulnerabilitiesCveViewCtrl($filter,
+                                    $location,
+                                    $scope,
                                     $stateParams,
                                     $state,
                                     InsightsConfig,
@@ -22,6 +24,13 @@ function vulnerabilitiesCveViewCtrl($scope,
     $scope.tabs = SystemModalTabs;
     $scope.showSystem = InventoryService.showSystemModal;
     $scope.config = InsightsConfig;
+
+    $scope.sorter = new Utils.Sorter(
+        {
+            predicate: $location.search().sort_by || 'toString',
+            reverse: $location.search().reverse || false
+        },
+        order);
 
     function initPageHeader () {
         const public_date = `Public Date: ${$scope.cve.public_date}`;
@@ -51,10 +60,33 @@ function vulnerabilitiesCveViewCtrl($scope,
                     cve_id: $scope.cve_id
                 }
             }, 1);
-            $scope.totalSystems = cve.systems_affected;
+            $scope.affectedSystems = cve.systems;
             initPageHeader();
         });
     }
+
+    function order () {
+        $location.search('sort_by', $scope.sorter.predicate);
+        $location.search('reverse', $scope.sorter.reverse);
+
+        // TODO: use this once api is available
+        // getData();
+
+        $scope.affectedSystems = $filter('orderBy')(
+            $scope.affectedSystems,
+            [($scope.sorter.reverse ?
+                '-' + $scope.sorter.predicate :
+                $scope.sorter.predicate)]);
+    }
+
+    $scope.search = function (model) {
+        if (!model || model === '') {
+            $scope.affectedSystems = $scope.cve.systems;
+        } else {
+            $scope.affectedSystems = $filter('filter')(
+              $scope.cve.systems, model);
+        }
+    };
 
     getData();
 }
