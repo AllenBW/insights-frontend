@@ -8,14 +8,15 @@ const statesModule = require('../../');
 function vulnerabilitiesCveViewCtrl($filter,
                                     $location,
                                     $scope,
-                                    $stateParams,
                                     $state,
-                                    InsightsConfig,
-                                    Utils,
-                                    Vulnerability,
+                                    $stateParams,
                                     BreadcrumbsService,
+                                    InsightsConfig,
                                     InventoryService,
-                                    SystemModalTabs) {
+                                    SystemModalTabs,
+                                    SystemsService,
+                                    Utils,
+                                    Vulnerability) {
 
     const breadcrumbs = BreadcrumbsService;
     breadcrumbs.init($stateParams);
@@ -50,7 +51,17 @@ function vulnerabilitiesCveViewCtrl($filter,
         }
     }
 
+    function initController () {
+        $scope.loading = true;
+
+        SystemsService.getSystemTypesAsync().then(function () {
+            getData();
+        });
+    }
+
     function getData () {
+        $scope.loading = true;
+
         Vulnerability.getCVE($scope.cve_id).then((cve) => {
             $scope.cve = cve;
             breadcrumbs.add({
@@ -63,6 +74,7 @@ function vulnerabilitiesCveViewCtrl($filter,
 
             $scope.affectedSystems = cve.systems;
             initPageHeader();
+            $scope.loading = false;
         });
     }
 
@@ -89,7 +101,7 @@ function vulnerabilitiesCveViewCtrl($filter,
         }
     };
 
-    getData();
+    initController();
 }
 
 statesModule.controller('vulnerabilitiesCveViewCtrl',

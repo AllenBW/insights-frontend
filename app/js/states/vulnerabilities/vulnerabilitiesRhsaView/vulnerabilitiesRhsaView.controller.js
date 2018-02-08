@@ -8,14 +8,15 @@ const statesModule = require('../../');
 function vulnerabilitiesRhsaViewCtrl($filter,
                                      $location,
                                      $scope,
-                                     $stateParams,
                                      $state,
+                                     $stateParams,
+                                     BreadcrumbsService,
                                      InsightsConfig,
-                                     Utils,
                                      InventoryService,
-                                     Vulnerability,
                                      SystemModalTabs,
-                                     BreadcrumbsService) {
+                                     SystemsService,
+                                     Utils,
+                                     Vulnerability) {
 
     const breadcrumbs = BreadcrumbsService;
     breadcrumbs.init($stateParams);
@@ -45,7 +46,16 @@ function vulnerabilitiesRhsaViewCtrl($filter,
                 cve_count];
     }
 
+    function initController () {
+        $scope.loading = true;
+
+        SystemsService.getSystemTypesAsync().then(function () {
+            getData();
+        });
+    }
+
     function getData () {
+        $scope.loading = true;
 
         // TODO: enable once API is available
         // let params = {};
@@ -63,6 +73,7 @@ function vulnerabilitiesRhsaViewCtrl($filter,
             });
             initPageHeader();
             $scope.affectedSystems = rhsa.systems;
+            $scope.loading = false;
         });
     }
 
@@ -80,7 +91,7 @@ function vulnerabilitiesRhsaViewCtrl($filter,
                 $scope.sorter.predicate)]);
     }
 
-    getData();
+    initController();
 
     $scope.search = function (model) {
         if (!model || model === '') {
