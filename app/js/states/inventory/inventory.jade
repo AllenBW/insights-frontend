@@ -70,7 +70,7 @@
               td.fit-content
                 a(ng-click="showActions(system)") {{system.toString}}
               td.fit-content.text-center.min
-                a(ng-click="showActions(system, alse, 'Vulnerabilities')") {{system.rhsa_count}}
+                a(ng-click="showActions(system, false, 'Vulnerabilities')") {{system.rhsa_count}}
               td.fit-content {{ system.last_check_in | timeAgo }}
               td.fit-content
                 a.action-count.icon-inline(ng-click='showActions(system)')

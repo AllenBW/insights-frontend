@@ -438,7 +438,8 @@ constantsModule.constant('VMAAS_PACKAGES_NOCVE', PACKAGES_NO_CVES);
  *         impact: String,
  *         systems: Array[Object],
  *         packages: Array[Object],
- *         description: String
+ *         description: String,
+ *         link: String
  *     }
  */
 constantsModule.constant('VMAAS_GET_CVE', (function () {
@@ -458,6 +459,7 @@ constantsModule.constant('VMAAS_GET_CVE', (function () {
         obj[key].packages = packages;
         obj[key].impact = cve.impact;
         obj[key].description = cve.description;
+        obj[key].link = cve.link;
     });
 
     return obj;
@@ -528,7 +530,8 @@ constantsModule.constant('VMAAS_GET_ALL_PACKAGES', (function () {
  *         type: String,
  *         description: String,
  *         cve_count: Number,
- *         issued: Date
+ *         issued: Date,
+ *         link: String
  *     }
  */
 constantsModule.constant('VMAAS_GET_RHSA', (function () {
@@ -554,6 +557,7 @@ constantsModule.constant('VMAAS_GET_RHSA', (function () {
         obj[key].cve_count = rhsa.cve_count;
         obj[key].issued = rhsa.issued;
         obj[key].topic = rhsa.summary;
+        obj[key].link = `https://access.redhat.com/errata/${rhsa.id}`;
     });
 
     return obj;

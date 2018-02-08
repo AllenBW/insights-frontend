@@ -25,7 +25,8 @@ function pageHeader() {
         scope: {
             title: '@',
             icon: '@',
-            subtitle: '='
+            subtitle: '=',
+            link: '@'
         }
     };
 }
