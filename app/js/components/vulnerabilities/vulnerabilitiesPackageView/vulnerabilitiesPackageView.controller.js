@@ -95,8 +95,8 @@ function vulnerabilitiesPackageViewCtrl($scope,
         return false;
     };
 
-    $scope.getRuleHits = function (rhsa) {
-        return rhsa.rule_hits === 1 ? '1 Hit' : `${rhsa.rule_hits} Hits`;
+    $scope.getAssociatedRule = function (rhsa) {
+        return rhsa.rule_hits === 1 ? '1 Rule' : `${rhsa.rule_hits} Rules`;
     };
 
     $scope.selectCVE = function (cve) {
