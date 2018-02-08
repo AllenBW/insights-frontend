@@ -60,7 +60,8 @@ function vulnerabilitiesCveViewCtrl($filter,
                     cve_id: $scope.cve_id
                 }
             });
-            $scope.totalSystems = cve.systems_affected;
+
+            $scope.affectedSystems = cve.systems;
             initPageHeader();
         });
     }
