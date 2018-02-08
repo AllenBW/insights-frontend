@@ -1,7 +1,7 @@
 .page-vulnerabilities-cve(ng-if='!loading')
   breadcrumbs
   section.vulnerability-details-header
-    page-header(title="{{:: cve.id}}", subtitle="pageHeaderSubtitle")
+    page-header(title="{{:: cve.id}}", subtitle="pageHeaderSubtitle", link="{{:: cve.link}}")
     aside.page-header-aside.icon-inline.severity(ng-class="{{'cve.impact'}}")
       i.fa.fa-shield
       span {{:: cve.impact}}
