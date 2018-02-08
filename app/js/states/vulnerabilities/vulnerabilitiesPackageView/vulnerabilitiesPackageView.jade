@@ -21,11 +21,11 @@
           strong
             a(ui-sref='app.vulnerabilities-package-rhsa({rhsa_id: rhsa.id, package_id: package.id, root_view: selectedView})',
               ng-click="$event.stopPropagation()")
-              .text {{ rhsa.id }}
+              .text {{:: rhsa.id }}
           .cve-count
-            span {{ rhsa.cves.length }} CVEs
+            span {{:: rhsa.cves.length }} CVEs
             .pipe |
-            span.hits  {{ getAssociatedRule(rhsa) }}
+            span.hits  {{:: getAssociatedRule(rhsa) }}
               i.fa.fa-book(tooltip="{{'This RHSA has an associated Insights Rule' | translate}}")
 
       card.card-cve-summary(ng-show='selectedRHSA', style="order: {{cveOrder}}")
@@ -40,7 +40,7 @@
               incident-icon(rule-id='report.rule_id', ng-if='selectedRule && !loadingRule')
               .title(ng-if='selectedRule && !loadingRule')
                 a(ui-sref='app.actions-rule({category: selectedRule.category, rule: selectedRule.rule_id})')
-                  |{{ selectedRule.category }} #{'>'} {{ selectedRule.description }}
+                  |{{:: selectedRule.category }} #{'>'} {{:: selectedRule.description }}
 
           ul.cve-id
             li(ng-repeat='cve in selectedRHSA.cves', ng-click='selectCVE(cve)')
@@ -56,14 +56,14 @@
           .cve-information
             .impact
               b Impact:
-              |  {{ selectedCVE.impact }}
+              |  {{:: selectedCVE.impact }}
             .public-date
               b Public-Date:
-              |  {{ selectedCVE.public_date }}
+              |  {{:: selectedCVE.public_date }}
             .iava(ng-if='selectedCVE.iava')
               b IAVA:
-              |  {{ selectedCVE.iava }}
+              |  {{:: selectedCVE.iava }}
             .cwe(ng-if='selectedCVE.cwes.length > 0')
               b CWEs: 
-                a(ng-repeat="cwe in selectedCVE.cwes", href="{{:: cwe.link}}", target="_blank") {{ cwe.id }}
+                a(ng-repeat="cwe in selectedCVE.cwes", href="{{:: cwe.link}}", target="_blank") {{:: cwe.id }}
 
