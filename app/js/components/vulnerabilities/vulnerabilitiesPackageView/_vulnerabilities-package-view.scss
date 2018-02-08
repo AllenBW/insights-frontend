@@ -137,6 +137,7 @@ $card-footer: "md-card-footer";
   .cve-information {
     grid-area: cve-information;
     grid-row: auto;
+    .cwe a + a:before { content: ", "; }
   }
 }
 
