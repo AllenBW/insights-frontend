@@ -14,6 +14,6 @@
       md-content
         policies-modal(system-id='system.system_id')
 
-    md-tab(label='Vulnerabilities')
+    md-tab(label='Vulnerabilities', ng-if="hasVulnerabilities")
       md-content
         vulnerabilities-modal(system-id='system.system_id')
