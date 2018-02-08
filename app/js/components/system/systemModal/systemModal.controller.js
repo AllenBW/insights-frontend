@@ -41,10 +41,6 @@ function SystemModalCtrl(
             // set the default tab for system modal; system if no value is passed in
             $scope.tabs.activeTab = activeTab || $scope.tabs.rules;
         });
-
-        System.getVulnerabilities($scope.system.system_id).then((system) => {
-            $scope.hasVulnerabiliities = system.rhsas.length > 0;
-        });
     }
 
     function close() {

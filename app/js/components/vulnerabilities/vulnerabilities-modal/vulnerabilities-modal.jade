@@ -1,5 +1,9 @@
-.vulnerabilities-modal
-  .content-wrap
+.vulnerabilities-modal(ng-if="!loading")
+  p.text-center(ng-if='!hasVulnerabilities()')
+    span.icon.icon-inline.success
+      i.fa.fa-check-circle
+      span(translate) No Vulnerabilities
+  .content-wrap(ng-if='hasVulnerabilities()')
     expand-all-button.toggle-expand-right
     card.card-vulnerabilities(expandable='true', ng-repeat="rhsa in system.rhsas", init-collapsed="!defaultExpanded(rhsa)")
 
