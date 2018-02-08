@@ -21,7 +21,6 @@ function vulnerabilitiesCveViewCtrl($scope,
     $scope.cve_id = $stateParams.cve_id;
     $scope.tabs = SystemModalTabs;
     $scope.showSystem = InventoryService.showSystemModal;
-    $scope.checkboxes = new Utils.Checkboxes('system_id');
     $scope.config = InsightsConfig;
 
     function initPageHeader () {
@@ -58,22 +57,6 @@ function vulnerabilitiesCveViewCtrl($scope,
     }
 
     getData();
-
-    $scope.$watchCollection('checkboxes.items', updateCheckboxes);
-    function updateCheckboxes () {
-        $scope.checkboxes.update($scope.ruleSystems);
-
-        if ($scope.checkboxes.totalChecked > 0) {
-            $scope.noSystemsSelected = false;
-        }
-
-        $scope.allSelected = ($scope.checkboxes.totalChecked > 0 &&
-                             !$scope.checkboxes.indeterminate);
-
-        if (!$scope.allSelected) {
-            $scope.reallyAllSelected = false;
-        }
-    }
 }
 
 componentsModule.controller('vulnerabilitiesCveViewCtrl',

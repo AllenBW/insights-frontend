@@ -19,7 +19,6 @@ function vulnerabilitiesRhsaViewCtrl($scope,
     breadcrumbs.init($stateParams);
 
     $scope.rhsa_id = $stateParams.rhsa_id;
-    $scope.checkboxes = new Utils.Checkboxes('system_id');
     $scope.config = InsightsConfig;
     $scope.showSystem = InventoryService.showSystemModal;
     $scope.tabs = SystemModalTabs;
@@ -53,22 +52,6 @@ function vulnerabilitiesRhsaViewCtrl($scope,
     }
 
     getData();
-
-    $scope.$watchCollection('checkboxes.items', updateCheckboxes);
-    function updateCheckboxes () {
-        $scope.checkboxes.update($scope.ruleSystems);
-
-        if ($scope.checkboxes.totalChecked > 0) {
-            $scope.noSystemsSelected = false;
-        }
-
-        $scope.allSelected = ($scope.checkboxes.totalChecked > 0 &&
-                             !$scope.checkboxes.indeterminate);
-
-        if (!$scope.allSelected) {
-            $scope.reallyAllSelected = false;
-        }
-    }
 
     $scope.search = function (model) {
         //TODO: table search
