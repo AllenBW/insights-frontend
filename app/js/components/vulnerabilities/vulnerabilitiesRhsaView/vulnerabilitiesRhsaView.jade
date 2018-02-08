@@ -24,22 +24,22 @@
         search-box(placeholder="{{'Find a system' | translate}}", on-search='search(model)')
       .table-header
         .table-header-title
-          h3.system-count(translate, translate-n='totalSystems', translate-plural='{{:: $count}} Impacted Systems') 1 Impacted System
+          h3.system-count(translate, translate-n='rhsa.systems.length', translate-plural='{{:: $count}} Impacted Systems') 1 Impacted System
           small.light(ng-if='checkboxes.totalChecked', translate) &nbsp; {{checkboxes.totalChecked}} Selected
-            span(ng-if='allSelected && pager.perPage < totalSystems') .
+            span(ng-if='allSelected && pager.perPage < affectedSystems.length') .
               a(ng-if='!reallyAllSelected', ng-click='reallySelectAll()') &nbsp;Select All Systems.
               a(ng-if='reallyAllSelected', ng-click='deselectAll()') &nbsp;Deselect All Systems.
             span )
       table
         thead
           tr
-            th.min.sortable(translate) Type
-            th.sortable(translate) Name
-            th.min.fit-content.sortable(translate) Last Check In
+            th.min.sortable(ng-class="sorter.getSortClass('system_type_id')", ng-click="sorter.sort('system_type_id')", translate) Type
+            th.sortable(ng-class="sorter.getSortClass('toString')", ng-click="sorter.sort('toString')", translate) Name
+            th.min.fit-content.sortable(ng-class="sorter.getSortClass('last_check_in')", ng-click="sorter.sort('last_check_in')", translate) Last Check In
 
         tbody
           tr(ng-class="{'stale': !system.isCheckingIn}",
-             ng-repeat='system in rhsa.systems track by system.system_id')
+             ng-repeat='system in affectedSystems track by system.system_id')
             td.fit-content
               type-icon(type-id='system.system_type_id', include-text='true')
             td.break
