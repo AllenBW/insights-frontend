@@ -111,17 +111,8 @@ function VulnerabilitiesCtrl($filter,
         if (!model || model === '') {
             $scope.allVulnerabilities = _allVulnerabilities;
         } else {
-            $scope.allVulnerabilities = [];
-            _allVulnerabilities.forEach((vulnerability) => {
-                if (($scope.selectedView === $scope.views.package &&
-                    vulnerability.id.indexOf(model) !== -1) ||
-                    ($scope.selectedView === $scope.views.rhsa &&
-                    vulnerability.id.indexOf(model) !== -1) ||
-                    ($scope.selectedView === $scope.views.cve &&
-                    vulnerability.id.indexOf(model) !== -1)) {
-                    $scope.allVulnerabilities.push(vulnerability);
-                }
-            });
+            $scope.allVulnerabilities =
+                $filter('filter')(_allVulnerabilities, model);
         }
 
         reloadTable();
